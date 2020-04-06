@@ -18,11 +18,10 @@ try:
     from .identity_source_py3 import IdentitySource
     from .sku_py3 import Sku
     from .default_cluster_properties_py3 import DefaultClusterProperties
-    from .private_cloud_properties_py3 import PrivateCloudProperties
     from .private_cloud_py3 import PrivateCloud
-    from .cluster_properties_py3 import ClusterProperties
     from .cluster_py3 import Cluster
     from .admin_credentials_py3 import AdminCredentials
+    from .hcx_enterprise_site_py3 import HcxEnterpriseSite
 except (SyntaxError, ImportError):
     from .resource import Resource
     from .tracked_resource import TrackedResource
@@ -36,19 +35,22 @@ except (SyntaxError, ImportError):
     from .identity_source import IdentitySource
     from .sku import Sku
     from .default_cluster_properties import DefaultClusterProperties
-    from .private_cloud_properties import PrivateCloudProperties
     from .private_cloud import PrivateCloud
-    from .cluster_properties import ClusterProperties
     from .cluster import Cluster
     from .admin_credentials import AdminCredentials
+    from .hcx_enterprise_site import HcxEnterpriseSite
 from .operation_paged import OperationPaged
 from .private_cloud_paged import PrivateCloudPaged
 from .cluster_paged import ClusterPaged
+from .identity_source_paged import IdentitySourcePaged
+from .hcx_enterprise_site_paged import HcxEnterpriseSitePaged
 from .virtustream_client_enums import (
+    HcxEnterpriseSiteProvisioningState,
     SslEnum,
     PrivateCloudProvisioningState,
     InternetEnum,
     ClusterProvisioningState,
+    HcxEnterpriseSiteStatus,
 )
 
 __all__ = [
@@ -64,16 +66,19 @@ __all__ = [
     'IdentitySource',
     'Sku',
     'DefaultClusterProperties',
-    'PrivateCloudProperties',
     'PrivateCloud',
-    'ClusterProperties',
     'Cluster',
     'AdminCredentials',
+    'HcxEnterpriseSite',
     'OperationPaged',
     'PrivateCloudPaged',
     'ClusterPaged',
+    'IdentitySourcePaged',
+    'HcxEnterpriseSitePaged',
+    'HcxEnterpriseSiteProvisioningState',
     'SslEnum',
     'PrivateCloudProvisioningState',
     'InternetEnum',
     'ClusterProvisioningState',
+    'HcxEnterpriseSiteStatus',
 ]

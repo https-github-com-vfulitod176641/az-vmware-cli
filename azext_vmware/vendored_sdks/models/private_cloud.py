@@ -26,14 +26,70 @@ class PrivateCloud(TrackedResource):
     :type tags: dict[str, str]
     :param sku: The private cloud SKU
     :type sku: ~vendored_sdks.models.Sku
-    :param properties: The properties of a private cloud resource
-    :type properties: ~vendored_sdks.models.PrivateCloudProperties
+    :ivar provisioning_state: The provisioning state. Possible values include:
+     'Succeeded', 'Failed', 'Cancelled', 'Pending', 'Building', 'Deleting',
+     'Updating'
+    :vartype provisioning_state: str or
+     ~vendored_sdks.models.PrivateCloudProvisioningState
+    :param circuit: An ExpressRoute Circuit
+    :type circuit: ~vendored_sdks.models.Circuit
+    :param management_cluster: The default cluster used for management
+    :type management_cluster: ~vendored_sdks.models.DefaultClusterProperties
+    :ivar clusters: The clusters
+    :vartype clusters: list[str]
+    :ivar endpoints: The endpoints
+    :vartype endpoints: ~vendored_sdks.models.Endpoints
+    :param internet: Connectivity to internet is enabled or disabled. Possible
+     values include: 'Enabled', 'Disabled'
+    :type internet: str or ~vendored_sdks.models.InternetEnum
+    :ivar identity_sources: vCenter Single Sign On Identity Sources
+    :vartype identity_sources: list[str]
+    :param network_block: The block of addresses should be unique across VNet
+     in your subscription as well as on-premise. Make sure the CIDR format is
+     conformed to (A.B.C.D/X) where A,B,C,D are between 0 and 255, and X is
+     between 0 and 22
+    :type network_block: str
+    :ivar management_network: Network used to access vCenter Server and NSX-T
+     Manager
+    :vartype management_network: str
+    :ivar vcenter_certificate_thumbprint: Thumbprint of the vCenter Server SSL
+     certificate
+    :vartype vcenter_certificate_thumbprint: str
+    :ivar nsxt_certificate_thumbprint: Thumprint of the NSX-T Manager SSL
+     certificate
+    :vartype nsxt_certificate_thumbprint: str
+    :ivar provisioning_network: Used for virtual machine cold migration,
+     cloning, and snapshot migration
+    :vartype provisioning_network: str
+    :ivar vmotion_network: Used for live migration of virtual machines
+    :vartype vmotion_network: str
+    :param vcenter_password: Optionally, set the vCenter admin password when
+     the private cloud is created
+    :type vcenter_password: str
+    :param nsxt_password: Optionally, set the NSX-T Manager password when the
+     private cloud is created
+    :type nsxt_password: str
+    :ivar hcx_cloud_manager_ip: The IP address of the HCX Cloud Manager
+    :vartype hcx_cloud_manager_ip: str
+    :ivar hcx_enterprise_sites: The HCX Enterprise Sites
+    :vartype hcx_enterprise_sites: list[str]
     """
 
     _validation = {
         'id': {'readonly': True},
         'name': {'readonly': True},
         'type': {'readonly': True},
+        'provisioning_state': {'readonly': True},
+        'clusters': {'readonly': True},
+        'endpoints': {'readonly': True},
+        'identity_sources': {'readonly': True},
+        'management_network': {'readonly': True},
+        'vcenter_certificate_thumbprint': {'readonly': True},
+        'nsxt_certificate_thumbprint': {'readonly': True},
+        'provisioning_network': {'readonly': True},
+        'vmotion_network': {'readonly': True},
+        'hcx_cloud_manager_ip': {'readonly': True},
+        'hcx_enterprise_sites': {'readonly': True},
     }
 
     _attribute_map = {
@@ -43,10 +99,42 @@ class PrivateCloud(TrackedResource):
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'sku': {'key': 'sku', 'type': 'Sku'},
-        'properties': {'key': 'properties', 'type': 'PrivateCloudProperties'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'circuit': {'key': 'properties.circuit', 'type': 'Circuit'},
+        'management_cluster': {'key': 'properties.managementCluster', 'type': 'DefaultClusterProperties'},
+        'clusters': {'key': 'properties.clusters', 'type': '[str]'},
+        'endpoints': {'key': 'properties.endpoints', 'type': 'Endpoints'},
+        'internet': {'key': 'properties.internet', 'type': 'str'},
+        'identity_sources': {'key': 'properties.identitySources', 'type': '[str]'},
+        'network_block': {'key': 'properties.networkBlock', 'type': 'str'},
+        'management_network': {'key': 'properties.managementNetwork', 'type': 'str'},
+        'vcenter_certificate_thumbprint': {'key': 'properties.vcenterCertificateThumbprint', 'type': 'str'},
+        'nsxt_certificate_thumbprint': {'key': 'properties.nsxtCertificateThumbprint', 'type': 'str'},
+        'provisioning_network': {'key': 'properties.provisioningNetwork', 'type': 'str'},
+        'vmotion_network': {'key': 'properties.vmotionNetwork', 'type': 'str'},
+        'vcenter_password': {'key': 'properties.vcenterPassword', 'type': 'str'},
+        'nsxt_password': {'key': 'properties.nsxtPassword', 'type': 'str'},
+        'hcx_cloud_manager_ip': {'key': 'properties.hcxCloudManagerIP', 'type': 'str'},
+        'hcx_enterprise_sites': {'key': 'properties.hcxEnterpriseSites', 'type': '[str]'},
     }
 
     def __init__(self, **kwargs):
         super(PrivateCloud, self).__init__(**kwargs)
         self.sku = kwargs.get('sku', None)
-        self.properties = kwargs.get('properties', None)
+        self.provisioning_state = None
+        self.circuit = kwargs.get('circuit', None)
+        self.management_cluster = kwargs.get('management_cluster', None)
+        self.clusters = None
+        self.endpoints = None
+        self.internet = kwargs.get('internet', None)
+        self.identity_sources = None
+        self.network_block = kwargs.get('network_block', None)
+        self.management_network = None
+        self.vcenter_certificate_thumbprint = None
+        self.nsxt_certificate_thumbprint = None
+        self.provisioning_network = None
+        self.vmotion_network = None
+        self.vcenter_password = kwargs.get('vcenter_password', None)
+        self.nsxt_password = kwargs.get('nsxt_password', None)
+        self.hcx_cloud_manager_ip = None
+        self.hcx_enterprise_sites = None

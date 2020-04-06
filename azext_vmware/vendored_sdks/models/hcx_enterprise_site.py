@@ -5,11 +5,11 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .resource_py3 import Resource
+from .resource import Resource
 
 
-class Cluster(Resource):
-    """A cluster resource.
+class HcxEnterpriseSite(Resource):
+    """An HCX Enterprise Site resource.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.
@@ -20,40 +20,37 @@ class Cluster(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar cluster_id: The identity
-    :vartype cluster_id: int
-    :param cluster_size: The cluster size
-    :type cluster_size: int
-    :ivar hosts: The hosts
-    :vartype hosts: list[str]
-    :ivar provisioning_state: The state of the cluster provisioning. Possible
-     values include: 'Succeeded', 'Failed', 'Cancelled', 'Deleting', 'Updating'
+    :ivar provisioning_state: The state of the HCX Enterprise Site
+     provisioning. Possible values include: 'Succeeded', 'Failed', 'Updating'
     :vartype provisioning_state: str or
-     ~vendored_sdks.models.ClusterProvisioningState
+     ~vendored_sdks.models.HcxEnterpriseSiteProvisioningState
+    :ivar activation_key: The activation key
+    :vartype activation_key: str
+    :ivar status: The status of the HCX Enterprise Site. Possible values
+     include: 'Available', 'Consumed', 'Deactivated', 'Deleted'
+    :vartype status: str or ~vendored_sdks.models.HcxEnterpriseSiteStatus
     """
 
     _validation = {
         'id': {'readonly': True},
         'name': {'readonly': True},
         'type': {'readonly': True},
-        'cluster_id': {'readonly': True},
-        'hosts': {'readonly': True},
         'provisioning_state': {'readonly': True},
+        'activation_key': {'readonly': True},
+        'status': {'readonly': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
-        'cluster_id': {'key': 'properties.clusterId', 'type': 'int'},
-        'cluster_size': {'key': 'properties.clusterSize', 'type': 'int'},
-        'hosts': {'key': 'properties.hosts', 'type': '[str]'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'activation_key': {'key': 'properties.activationKey', 'type': 'str'},
+        'status': {'key': 'properties.status', 'type': 'str'},
     }
 
-    def __init__(self, *, cluster_size: int=None, **kwargs) -> None:
-        super(Cluster, self).__init__(**kwargs)
-        self.cluster_id = None
-        self.cluster_size = cluster_size
-        self.hosts = None
+    def __init__(self, **kwargs):
+        super(HcxEnterpriseSite, self).__init__(**kwargs)
         self.provisioning_state = None
+        self.activation_key = None
+        self.status = None

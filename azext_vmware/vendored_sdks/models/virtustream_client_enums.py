@@ -8,6 +8,13 @@
 from enum import Enum
 
 
+class HcxEnterpriseSiteProvisioningState(str, Enum):
+
+    succeeded = "Succeeded"
+    failed = "Failed"
+    updating = "Updating"
+
+
 class SslEnum(str, Enum):
 
     enabled = "Enabled"
@@ -21,6 +28,7 @@ class PrivateCloudProvisioningState(str, Enum):
     cancelled = "Cancelled"
     pending = "Pending"
     building = "Building"
+    deleting = "Deleting"
     updating = "Updating"
 
 
@@ -35,4 +43,13 @@ class ClusterProvisioningState(str, Enum):
     succeeded = "Succeeded"
     failed = "Failed"
     cancelled = "Cancelled"
+    deleting = "Deleting"
     updating = "Updating"
+
+
+class HcxEnterpriseSiteStatus(str, Enum):
+
+    available = "Available"
+    consumed = "Consumed"
+    deactivated = "Deactivated"
+    deleted = "Deleted"

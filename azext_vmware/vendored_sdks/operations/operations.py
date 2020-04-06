@@ -18,7 +18,7 @@ class Operations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An object model deserializer.
-    :ivar api_version: Version of Azure VMware Solution by Virtustream API to be used with the client request. Constant value: "2019-08-09-preview".
+    :ivar api_version: Version of Azure VMware Solution by Virtustream API to be used with the client request. Constant value: "2020-03-20-preview".
     """
 
     models = models
@@ -28,7 +28,7 @@ class Operations(object):
         self._client = client
         self._serialize = serializer
         self._deserialize = deserializer
-        self.api_version = "2019-08-09-preview"
+        self.api_version = "2020-03-20-preview"
 
         self.config = config
 
