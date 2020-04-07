@@ -46,15 +46,6 @@ def privatecloud_delete(cmd, client: VirtustreamClient, resource_group_name, nam
 def privatecloud_listadmincredentials(cmd, client: VirtustreamClient, resource_group_name, private_cloud):
     return client.private_clouds.list_admin_credentials(resource_group_name=resource_group_name, private_cloud_name=private_cloud)
 
-def privatecloud_addidentitysource(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, alias, domain, base_user_dn, base_group_dn, primary_server, username, password, secondary_server=None, ssl="Disabled"):
-    from azext_vmware.vendored_sdks.models import IdentitySource
-    pc = client.private_clouds.get(resource_group_name, private_cloud)
-    identitysource = IdentitySource(name=name, alias=alias, domain=domain, base_user_dn=base_user_dn, base_group_dn=base_group_dn, primary_server=primary_server, ssl=ssl, username=username, password=password)
-    if secondary_server is not None:
-        identitysource.secondary_server = secondary_server
-    pc.properties.identity_sources.append(identitysource)
-    return client.private_clouds.update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, private_cloud=pc)
-
 def privatecloud_deleteidentitysource(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, alias, domain):
     from azext_vmware.vendored_sdks.models import IdentitySource
     pc = client.private_clouds.get(resource_group_name, private_cloud)
@@ -84,14 +75,14 @@ def privatecloud_deleteauthorization(cmd, client: VirtustreamClient, resource_gr
     else:
         return pc
 
-def cluster_create(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, size, tags=[]):
+def cluster_create(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, size):
     from azext_vmware.vendored_sdks.models import Cluster
-    cluster = Cluster(cluster_size=size, tags=tags)
+    cluster = Cluster(cluster_size=size)
     return client.clusters.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster=cluster)
 
-def cluster_update(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, size, tags=[]):
+def cluster_update(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, size):
     from azext_vmware.vendored_sdks.models import Cluster
-    cluster = Cluster(cluster_size=size, tags=tags)
+    cluster = Cluster(cluster_size=size)
     return client.clusters.update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster=cluster)
 
 def cluster_list(cmd, client: VirtustreamClient, resource_group_name, private_cloud):
@@ -102,3 +93,32 @@ def cluster_show(cmd, client: VirtustreamClient, resource_group_name, private_cl
 
 def cluster_delete(cmd, client: VirtustreamClient, resource_group_name, private_cloud, name):
     return client.clusters.delete(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name)
+
+
+def identitysource_create(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, alias, domain, base_user_dn, base_group_dn, primary_server, username, password, secondary_server=None, ssl="Disabled"):
+    from azext_vmware.vendored_sdks.models import IdentitySource
+    identity_source = IdentitySource(name=name, alias=alias, domain=domain, base_user_dn=base_user_dn, base_group_dn=base_group_dn, primary_server=primary_server, secondary_server = secondary_server, ssl=ssl, username=username, password=password)
+    return client.identity_sources.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, identity_source_name=name, identity_source=identity_source)
+
+def identitysource_list(cmd, client: VirtustreamClient, resource_group_name, private_cloud):
+    return client.identity_sources.list(resource_group_name=resource_group_name, private_cloud_name=private_cloud)
+
+def identitysource_show(cmd, client: VirtustreamClient, resource_group_name, private_cloud, name):
+    return client.identity_sources.get(resource_group_name=resource_group_name, private_cloud_name=private_cloud, identitysource_name=name)
+
+def identitysource_delete(cmd, client: VirtustreamClient, resource_group_name, private_cloud, name):
+    return client.identity_sources.delete(resource_group_name=resource_group_name, private_cloud_name=private_cloud, identitysource_name=name)
+
+
+def hcxenterprisesite_create(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, size, tags=[]):
+    from azext_vmware.vendored_sdks.models import HcxEnterpriseSite
+    return client.hcx_enterprise_sites.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, hcx_enterprise_site_name=name)
+
+def hcxenterprisesite_list(cmd, client: VirtustreamClient, resource_group_name, private_cloud):
+    return client.hcx_enterprise_sites.list(resource_group_name=resource_group_name, private_cloud_name=private_cloud)
+
+def hcxenterprisesite_show(cmd, client: VirtustreamClient, resource_group_name, private_cloud, name):
+    return client.hcx_enterprise_sites.get(resource_group_name=resource_group_name, private_cloud_name=private_cloud, hcx_enterprise_site_name=name)
+
+def hcxenterprisesite_delete(cmd, client: VirtustreamClient, resource_group_name, private_cloud, name):
+    return client.hcx_enterprise_sites.delete(resource_group_name=resource_group_name, private_cloud_name=private_cloud, hcx_enterprise_site_name=name)

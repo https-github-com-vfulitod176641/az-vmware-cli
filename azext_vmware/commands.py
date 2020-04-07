@@ -23,8 +23,6 @@ def load_command_table(self, _):
         
         g.custom_command('addauthorization', 'privatecloud_addauthorization')
         g.custom_command('deleteauthorization', 'privatecloud_deleteauthorization')
-        g.custom_command('addidentitysource', 'privatecloud_addidentitysource')
-        g.custom_command('deleteidentitysource', 'privatecloud_deleteidentitysource')
 
     with self.command_group('vmware cluster', vmware_sdk, client_factory=cf_vmware) as g:
         g.custom_command('create', 'cluster_create')
@@ -32,3 +30,15 @@ def load_command_table(self, _):
         g.custom_command('list', 'cluster_list')
         g.custom_command('delete', 'cluster_delete')
         g.custom_command('show', 'cluster_show')
+
+    with self.command_group('vmware identity-source', vmware_sdk, client_factory=cf_vmware) as g:
+        g.custom_command('create', 'identitysource_create')
+        g.custom_command('list', 'identitysource_list')
+        g.custom_command('delete', 'identitysource_delete')
+        g.custom_command('show', 'identitysource_show')
+
+    with self.command_group('vmware hcx-enterprise-site', vmware_sdk, client_factory=cf_vmware) as g:
+        g.custom_command('create', 'hcxenterprisesite_create')
+        g.custom_command('list', 'hcxenterprisesite_list')
+        g.custom_command('delete', 'hcxenterprisesite_delete')
+        g.custom_command('show', 'hcxenterprisesite_show')

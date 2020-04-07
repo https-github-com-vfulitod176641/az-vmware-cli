@@ -23,6 +23,16 @@ helps['vmware cluster'] = """
     short-summary: Commands to manage clusters in a private cloud.
 """
 
+helps['vmware identity-source'] = """
+    type: group
+    short-summary: Commands to manage vCenter Single Sign On Identity Sources in a private cloud.
+"""
+
+helps['vmware hcx-enterprise-site'] = """
+    type: group
+    short-summary: Commands to manage HCX Enterprise Sites in a private cloud.
+"""
+
 helps['vmware cluster create'] = """
     type: command
     short-summary: Create a cluster in a private cloud. The maximum number of clusters is 4.
@@ -53,11 +63,6 @@ helps['vmware private-cloud addauthorization'] = """
     short-summary: Add an authorization to the ExpressRoute for a private cloud.
 """
 
-helps['vmware private-cloud addidentitysource'] = """
-    type: command
-    short-summary: Add a vCenter Single Sign On Identity Source to a private cloud.
-"""
-
 helps['vmware private-cloud create'] = """
     type: command
     short-summary: Create a private cloud.
@@ -71,11 +76,6 @@ helps['vmware private-cloud delete'] = """
 helps['vmware private-cloud deleteauthorization'] = """
     type: command
     short-summary: Delete an authorization to the ExpressRoute for a private cloud.
-"""
-
-helps['vmware private-cloud deleteidentitysource'] = """
-    type: command
-    short-summary: Delete a vCenter Single Sign On Identity Source for a private cloud.
 """
 
 helps['vmware private-cloud list'] = """
@@ -96,4 +96,44 @@ helps['vmware private-cloud show'] = """
 helps['vmware private-cloud update'] = """
     type: command
     short-summary: Update a private cloud.
+"""
+
+helps['vmware identity-source create'] = """
+    type: command
+    short-summary: Create an identity source in a private cloud.
+"""
+
+helps['vmware identity-source list'] = """
+    type: command
+    short-summary: List identity sources in a private cloud.
+"""
+
+helps['vmware identity-source show'] = """
+    type: command
+    short-summary: Show details of an identity source in a private cloud.
+"""
+
+helps['vmware identity-source delete'] = """
+    type: command
+    short-summary: Delete an identity source in a private cloud.
+"""
+
+helps['vmware hcx-enterprise-site create'] = """
+    type: command
+    short-summary: Create an HCX Enterprise Site in a private cloud.
+"""
+
+helps['vmware hcx-enterprise-site list'] = """
+    type: command
+    short-summary: List HCX Enterprise Sites in a private cloud.
+"""
+
+helps['vmware hcx-enterprise-site show'] = """
+    type: command
+    short-summary: Show details of an HCX Enterprise Site in a private cloud.
+"""
+
+helps['vmware hcx-enterprise-site delete'] = """
+    type: command
+    short-summary: Delete an HCX Enterprise Site in a private cloud.
 """
