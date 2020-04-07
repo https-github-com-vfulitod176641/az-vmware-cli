@@ -17,20 +17,19 @@ def privatecloud_show(cmd, client: VirtustreamClient, resource_group_name, name)
     return client.private_clouds.get(resource_group_name, name)
 
 def privatecloud_create(cmd, client: VirtustreamClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
-    from azext_vmware.vendored_sdks.models import PrivateCloud, PrivateCloudProperties, Circuit, DefaultClusterProperties, Sku
+    from azext_vmware.vendored_sdks.models import PrivateCloud, Circuit, DefaultClusterProperties, Sku
     if circuit_primary_subnet is not None or circuit_secondary_subnet is not None:
         circuit = Circuit(primary_subnet=circuit_primary_subnet, secondary_subnet=circuit_secondary_subnet)
     else:
         circuit = None
     clusterProps = DefaultClusterProperties(cluster_size=cluster_size)
-    cloudProps = PrivateCloudProperties(circuit=circuit, cluster=clusterProps, network_block=network_block)
-    cloud = PrivateCloud(location=location, sku=Sku(name=sku), properties=cloudProps, tags=tags)
+    cloud = PrivateCloud(location=location, sku=Sku(name=sku), circuit=circuit, cluster=clusterProps, network_block=network_block, tags=tags)
     if internet is not None:
-        cloud.properties.internet = internet
+        cloud.internet = internet
     if vcenter_password is not None:
-        cloud.properties.vcenter_password = vcenter_password
+        cloud.vcenter_password = vcenter_password
     if nsxt_password is not None:
-        cloud.properties.nsxt_password = nsxt_password
+        cloud.nsxt_password = nsxt_password
     return client.private_clouds.create_or_update(resource_group_name, name, cloud)
 
 def privatecloud_update(cmd, client: VirtustreamClient, resource_group_name, name, cluster_size=None, internet=None):
@@ -86,15 +85,13 @@ def privatecloud_deleteauthorization(cmd, client: VirtustreamClient, resource_gr
         return pc
 
 def cluster_create(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, size, tags=[]):
-    from azext_vmware.vendored_sdks.models import Cluster, ClusterProperties
-    clusterProps = ClusterProperties(cluster_size=size)
-    cluster = Cluster(properties=clusterProps, tags=tags)
+    from azext_vmware.vendored_sdks.models import Cluster
+    cluster = Cluster(cluster_size=size, tags=tags)
     return client.clusters.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster=cluster)
 
 def cluster_update(cmd, client: VirtustreamClient, resource_group_name, name, private_cloud, size, tags=[]):
-    from azext_vmware.vendored_sdks.models import Cluster, ClusterProperties
-    clusterProps = ClusterProperties(cluster_size=size)
-    cluster = Cluster(properties=clusterProps, tags=tags)
+    from azext_vmware.vendored_sdks.models import Cluster
+    cluster = Cluster(cluster_size=size, tags=tags)
     return client.clusters.update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster=cluster)
 
 def cluster_list(cmd, client: VirtustreamClient, resource_group_name, private_cloud):
