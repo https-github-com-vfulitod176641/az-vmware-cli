@@ -41,13 +41,10 @@ def load_arguments(self, _):
     with self.argument_context('vmware private-cloud delete') as c:
         c.argument('name', options_list=['--name', '-n'], help='Name of the private cloud.')
 
-    with self.argument_context('vmware private-cloud addauthorization') as c:
+    with self.argument_context('vmware authorization') as c:
         c.argument('name', options_list=['--name', '-n'], help='Name of the authorization.')
 
-    with self.argument_context('vmware private-cloud deleteauthorization') as c:
-        c.argument('name', options_list=['--name', '-n'], help='Name of the authorization.')
-
-    with self.argument_context('vmware identity-source') as c:
+    with self.argument_context('vmware private-cloud addidentitysource') as c:
         c.argument('alias', help='The domain\'s NetBIOS name.')
         c.argument('base_group_dn', help='The base distinguished name for groups.')
         c.argument('base_user_dn', help='The base distinguished name for users.')
@@ -58,6 +55,11 @@ def load_arguments(self, _):
         c.argument('secondary_server', help='Secondary server URL.')
         c.argument('ssl', help='Protect LDAP communication using SSL certificate (LDAPS). Specify "Enabled" or "Disabled".')
         c.argument('username', help='The ID of an Active Directory user with a minimum of read-only access to Base DN for users and group.')
+
+    with self.argument_context('vmware private-cloud deleteidentitysource') as c:
+        c.argument('alias', help='The domain\'s NetBIOS name.')
+        c.argument('domain', help='The domain\'s dns name.')
+        c.argument('name', options_list=['--name', '-n'], help='The name of the identity source.')
 
     with self.argument_context('vmware private-cloud update') as c:
         c.argument('name', options_list=['--name', '-n'], help='Name of the private cloud.')
