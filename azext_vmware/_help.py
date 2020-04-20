@@ -23,9 +23,9 @@ helps['vmware cluster'] = """
     short-summary: Commands to manage clusters in a private cloud.
 """
 
-helps['vmware identity-source'] = """
+helps['vmware authorization'] = """
     type: group
-    short-summary: Commands to manage vCenter Single Sign On Identity Sources in a private cloud.
+    short-summary: Commands to manage the authorizations of an ExpressRoute Circuit for a private cloud.
 """
 
 helps['vmware hcx-enterprise-site'] = """
@@ -58,9 +58,9 @@ helps['vmware cluster update'] = """
     short-summary: Update a cluster in a private cloud.
 """
 
-helps['vmware private-cloud addauthorization'] = """
+helps['vmware private-cloud addidentitysource'] = """
     type: command
-    short-summary: Add an authorization to the ExpressRoute for a private cloud.
+    short-summary: Add a vCenter Single Sign On Identity Source to a private cloud.
 """
 
 helps['vmware private-cloud create'] = """
@@ -73,9 +73,9 @@ helps['vmware private-cloud delete'] = """
     short-summary: Delete a private cloud.
 """
 
-helps['vmware private-cloud deleteauthorization'] = """
+helps['vmware private-cloud deleteidentitysource'] = """
     type: command
-    short-summary: Delete an authorization to the ExpressRoute for a private cloud.
+    short-summary: Delete a vCenter Single Sign On Identity Source for a private cloud.
 """
 
 helps['vmware private-cloud list'] = """
@@ -98,24 +98,24 @@ helps['vmware private-cloud update'] = """
     short-summary: Update a private cloud.
 """
 
-helps['vmware identity-source create'] = """
+helps['vmware authorization create'] = """
     type: command
-    short-summary: Create an identity source in a private cloud.
+    short-summary: Create an authorization for an ExpressRoute Circuit in a private cloud.
 """
 
-helps['vmware identity-source list'] = """
+helps['vmware authorization list'] = """
     type: command
-    short-summary: List identity sources in a private cloud.
+    short-summary: List authorizations for an ExpressRoute Circuit in a private cloud.
 """
 
-helps['vmware identity-source show'] = """
+helps['vmware authorization show'] = """
     type: command
-    short-summary: Show details of an identity source in a private cloud.
+    short-summary: Show details of an authorization for an ExpressRoute Circuit in a private cloud.
 """
 
-helps['vmware identity-source delete'] = """
+helps['vmware authorization delete'] = """
     type: command
-    short-summary: Delete an identity source in a private cloud.
+    short-summary: Delete an authorization for an ExpressRoute Circuit in a private cloud.
 """
 
 helps['vmware hcx-enterprise-site create'] = """
