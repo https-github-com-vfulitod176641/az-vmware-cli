@@ -8,7 +8,7 @@
 from enum import Enum
 
 
-class HcxEnterpriseSiteProvisioningState(str, Enum):
+class ExpressRouteAuthorizationProvisioningState(str, Enum):
 
     succeeded = "Succeeded"
     failed = "Failed"

@@ -37,9 +37,7 @@ python setup.py bdist_wheel
 The code in the `azext_vmware/vendored_sdks` subdirectory was generated using the [AutoRest CLI](http://azure.github.io/autorest/user/command-line-interface.html). It is a Node app that bootstraps a dotnet app. It generates code from the a Swagger 2 spec. Here is how the current code was generated:
 
 ``` ps
-cp ../azure-rest-api-specs/specification/vmwarevirtustream/resource-manager/Microsoft.VMwareVirtustream/preview/2020-03-20-preview/vmwarevirtustream.json .
-cp ../azure-rest-api-specs/specification/vmwarevirtustream/resource-manager/Microsoft.VMwareVirtustream/preview/2020-03-20-preview/examples/*.json examples/
-docker run --rm -it -v ${PWD}:/src -w /src node:lts bash
+docker run --rm -it -v ${PWD}:/src -v ${PWD}/../azure-rest-api-specs:/azure-rest-api-specs -w /src node:lts bash
 ```
 
 ``` sh

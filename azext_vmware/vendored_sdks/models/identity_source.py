@@ -5,27 +5,14 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .resource import Resource
+from msrest.serialization import Model
 
 
-class IdentitySource(Resource):
+class IdentitySource(Model):
     """vCenter Single Sign On Identity Source.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar id: Resource ID.
-    :vartype id: str
-    :ivar name: Resource name.
-    :vartype name: str
-    :ivar type: Resource type.
-    :vartype type: str
-    :ivar provisioning_state: The state of the identity source provisioning.
-     Possible values include: 'Succeeded', 'Failed', 'Updating'
-    :vartype provisioning_state: str or
-     ~vendored_sdks.models.HcxEnterpriseSiteProvisioningState
-    :param identity_source_name: The name of the identity source
-    :type identity_source_name: str
+    :param name: The name of the identity source
+    :type name: str
     :param alias: The domain's NetBIOS name
     :type alias: str
     :param domain: The domain's dns name
@@ -49,34 +36,22 @@ class IdentitySource(Resource):
     :type password: str
     """
 
-    _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-    }
-
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'identity_source_name': {'key': 'properties.name', 'type': 'str'},
-        'alias': {'key': 'properties.alias', 'type': 'str'},
-        'domain': {'key': 'properties.domain', 'type': 'str'},
-        'base_user_dn': {'key': 'properties.baseUserDN', 'type': 'str'},
-        'base_group_dn': {'key': 'properties.baseGroupDN', 'type': 'str'},
-        'primary_server': {'key': 'properties.primaryServer', 'type': 'str'},
-        'secondary_server': {'key': 'properties.secondaryServer', 'type': 'str'},
-        'ssl': {'key': 'properties.ssl', 'type': 'str'},
-        'username': {'key': 'properties.username', 'type': 'str'},
-        'password': {'key': 'properties.password', 'type': 'str'},
+        'alias': {'key': 'alias', 'type': 'str'},
+        'domain': {'key': 'domain', 'type': 'str'},
+        'base_user_dn': {'key': 'baseUserDN', 'type': 'str'},
+        'base_group_dn': {'key': 'baseGroupDN', 'type': 'str'},
+        'primary_server': {'key': 'primaryServer', 'type': 'str'},
+        'secondary_server': {'key': 'secondaryServer', 'type': 'str'},
+        'ssl': {'key': 'ssl', 'type': 'str'},
+        'username': {'key': 'username', 'type': 'str'},
+        'password': {'key': 'password', 'type': 'str'},
     }
 
     def __init__(self, **kwargs):
         super(IdentitySource, self).__init__(**kwargs)
-        self.provisioning_state = None
-        self.identity_source_name = kwargs.get('identity_source_name', None)
+        self.name = kwargs.get('name', None)
         self.alias = kwargs.get('alias', None)
         self.domain = kwargs.get('domain', None)
         self.base_user_dn = kwargs.get('base_user_dn', None)

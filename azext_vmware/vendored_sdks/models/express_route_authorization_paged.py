@@ -8,16 +8,16 @@
 from msrest.paging import Paged
 
 
-class IdentitySourcePaged(Paged):
+class ExpressRouteAuthorizationPaged(Paged):
     """
-    A paging container for iterating over a list of :class:`IdentitySource <vendored_sdks.models.IdentitySource>` object
+    A paging container for iterating over a list of :class:`ExpressRouteAuthorization <vendored_sdks.models.ExpressRouteAuthorization>` object
     """
 
     _attribute_map = {
         'next_link': {'key': 'nextLink', 'type': 'str'},
-        'current_page': {'key': 'value', 'type': '[IdentitySource]'}
+        'current_page': {'key': 'value', 'type': '[ExpressRouteAuthorization]'}
     }
 
     def __init__(self, *args, **kwargs):
 
-        super(IdentitySourcePaged, self).__init__(*args, **kwargs)
+        super(ExpressRouteAuthorizationPaged, self).__init__(*args, **kwargs)

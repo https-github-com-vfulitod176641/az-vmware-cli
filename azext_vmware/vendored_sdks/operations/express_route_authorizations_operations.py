@@ -7,12 +7,14 @@
 
 import uuid
 from msrest.pipeline import ClientRawResponse
+from msrest.polling import LROPoller, NoPolling
+from msrestazure.polling.arm_polling import ARMPolling
 
 from .. import models
 
 
-class HcxEnterpriseSitesOperations(object):
-    """HcxEnterpriseSitesOperations operations.
+class ExpressRouteAuthorizationsOperations(object):
+    """ExpressRouteAuthorizationsOperations operations.
 
     :param client: Client for service requests.
     :param config: Configuration of service client.
@@ -34,7 +36,7 @@ class HcxEnterpriseSitesOperations(object):
 
     def list(
             self, resource_group_name, private_cloud_name, custom_headers=None, raw=False, **operation_config):
-        """List HCX Enterprise Sites in a private cloud.
+        """List ExpressRoute Circuit Authorizations in a private cloud.
 
         :param resource_group_name: The name of the resource group. The name
          is case insensitive.
@@ -46,9 +48,9 @@ class HcxEnterpriseSitesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: An iterator like instance of HcxEnterpriseSite
+        :return: An iterator like instance of ExpressRouteAuthorization
         :rtype:
-         ~vendored_sdks.models.HcxEnterpriseSitePaged[~vendored_sdks.models.HcxEnterpriseSite]
+         ~vendored_sdks.models.ExpressRouteAuthorizationPaged[~vendored_sdks.models.ExpressRouteAuthorization]
         :raises:
          :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
         """
@@ -92,35 +94,35 @@ class HcxEnterpriseSitesOperations(object):
             return response
 
         # Deserialize response
-        deserialized = models.HcxEnterpriseSitePaged(internal_paging, self._deserialize.dependencies)
+        deserialized = models.ExpressRouteAuthorizationPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
             header_dict = {}
-            client_raw_response = models.HcxEnterpriseSitePaged(internal_paging, self._deserialize.dependencies, header_dict)
+            client_raw_response = models.ExpressRouteAuthorizationPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
-    list.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites'}
+    list.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/authorizations'}
 
     def get(
-            self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, custom_headers=None, raw=False, **operation_config):
-        """Get an HCX Enterprise Site by name in a private cloud.
+            self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, **operation_config):
+        """Get an ExpressRoute Circuit Authorization by name in a private cloud.
 
         :param resource_group_name: The name of the resource group. The name
          is case insensitive.
         :type resource_group_name: str
         :param private_cloud_name: Name of the private cloud
         :type private_cloud_name: str
-        :param hcx_enterprise_site_name: Name of the HCX Enterprise Site in
-         the private cloud
-        :type hcx_enterprise_site_name: str
+        :param authorization_name: Name of the ExpressRoute Circuit
+         Authorization in the private cloud
+        :type authorization_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: HcxEnterpriseSite or ClientRawResponse if raw=true
-        :rtype: ~vendored_sdks.models.HcxEnterpriseSite or
+        :return: ExpressRouteAuthorization or ClientRawResponse if raw=true
+        :rtype: ~vendored_sdks.models.ExpressRouteAuthorization or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
@@ -131,7 +133,7 @@ class HcxEnterpriseSitesOperations(object):
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str', min_length=1),
             'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1, pattern=r'^[-\w\._\(\)]+$'),
             'privateCloudName': self._serialize.url("private_cloud_name", private_cloud_name, 'str'),
-            'hcxEnterpriseSiteName': self._serialize.url("hcx_enterprise_site_name", hcx_enterprise_site_name, 'str')
+            'authorizationName': self._serialize.url("authorization_name", authorization_name, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -159,45 +161,25 @@ class HcxEnterpriseSitesOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('HcxEnterpriseSite', response)
+            deserialized = self._deserialize('ExpressRouteAuthorization', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
+    get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/authorizations/{authorizationName}'}
 
-    def create_or_update(
-            self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, custom_headers=None, raw=False, **operation_config):
-        """Create or update an HCX Enterprise Site in a private cloud.
 
-        :param resource_group_name: The name of the resource group. The name
-         is case insensitive.
-        :type resource_group_name: str
-        :param private_cloud_name: The name of the private cloud.
-        :type private_cloud_name: str
-        :param hcx_enterprise_site_name: Name of the HCX Enterprise Site in
-         the private cloud
-        :type hcx_enterprise_site_name: str
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: HcxEnterpriseSite or ClientRawResponse if raw=true
-        :rtype: ~vendored_sdks.models.HcxEnterpriseSite or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
-        """
+    def _create_or_update_initial(
+            self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, **operation_config):
         # Construct URL
         url = self.create_or_update.metadata['url']
         path_format_arguments = {
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str', min_length=1),
             'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1, pattern=r'^[-\w\._\(\)]+$'),
             'privateCloudName': self._serialize.url("private_cloud_name", private_cloud_name, 'str'),
-            'hcxEnterpriseSiteName': self._serialize.url("hcx_enterprise_site_name", hcx_enterprise_site_name, 'str')
+            'authorizationName': self._serialize.url("authorization_name", authorization_name, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -225,46 +207,81 @@ class HcxEnterpriseSitesOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('HcxEnterpriseSite', response)
+            deserialized = self._deserialize('ExpressRouteAuthorization', response)
         if response.status_code == 201:
-            deserialized = self._deserialize('HcxEnterpriseSite', response)
+            deserialized = self._deserialize('ExpressRouteAuthorization', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    create_or_update.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
 
-    def delete(
-            self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, custom_headers=None, raw=False, **operation_config):
-        """Delete an HCX Enterprise Site in a private cloud.
+    def create_or_update(
+            self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, polling=True, **operation_config):
+        """Create or update an ExpressRoute Circuit Authorization in a private
+        cloud.
 
         :param resource_group_name: The name of the resource group. The name
          is case insensitive.
         :type resource_group_name: str
-        :param private_cloud_name: Name of the private cloud
+        :param private_cloud_name: The name of the private cloud.
         :type private_cloud_name: str
-        :param hcx_enterprise_site_name: Name of the HCX Enterprise Site in
-         the private cloud
-        :type hcx_enterprise_site_name: str
+        :param authorization_name: Name of the ExpressRoute Circuit
+         Authorization in the private cloud
+        :type authorization_name: str
         :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: None or ClientRawResponse if raw=true
-        :rtype: None or ~msrest.pipeline.ClientRawResponse
+        :param bool raw: The poller return type is ClientRawResponse, the
+         direct response alongside the deserialized response
+        :param polling: True for ARMPolling, False for no polling, or a
+         polling object for personal polling strategy
+        :return: An instance of LROPoller that returns
+         ExpressRouteAuthorization or
+         ClientRawResponse<ExpressRouteAuthorization> if raw==True
+        :rtype:
+         ~msrestazure.azure_operation.AzureOperationPoller[~vendored_sdks.models.ExpressRouteAuthorization]
+         or
+         ~msrestazure.azure_operation.AzureOperationPoller[~msrest.pipeline.ClientRawResponse[~vendored_sdks.models.ExpressRouteAuthorization]]
         :raises:
          :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
         """
+        raw_result = self._create_or_update_initial(
+            resource_group_name=resource_group_name,
+            private_cloud_name=private_cloud_name,
+            authorization_name=authorization_name,
+            custom_headers=custom_headers,
+            raw=True,
+            **operation_config
+        )
+
+        def get_long_running_output(response):
+            deserialized = self._deserialize('ExpressRouteAuthorization', response)
+
+            if raw:
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
+
+            return deserialized
+
+        lro_delay = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        if polling is True: polling_method = ARMPolling(lro_delay, **operation_config)
+        elif polling is False: polling_method = NoPolling()
+        else: polling_method = polling
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+    create_or_update.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/authorizations/{authorizationName}'}
+
+
+    def _delete_initial(
+            self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, **operation_config):
         # Construct URL
         url = self.delete.metadata['url']
         path_format_arguments = {
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str', min_length=1),
             'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1, pattern=r'^[-\w\._\(\)]+$'),
             'privateCloudName': self._serialize.url("private_cloud_name", private_cloud_name, 'str'),
-            'hcxEnterpriseSiteName': self._serialize.url("hcx_enterprise_site_name", hcx_enterprise_site_name, 'str')
+            'authorizationName': self._serialize.url("authorization_name", authorization_name, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -285,10 +302,56 @@ class HcxEnterpriseSitesOperations(object):
         request = self._client.delete(url, query_parameters, header_parameters)
         response = self._client.send(request, stream=False, **operation_config)
 
-        if response.status_code not in [200, 204]:
+        if response.status_code not in [200, 202, 204]:
             raise models.ApiErrorException(self._deserialize, response)
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
-    delete.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
+
+    def delete(
+            self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, polling=True, **operation_config):
+        """Delete an ExpressRoute Circuit Authorization in a private cloud.
+
+        :param resource_group_name: The name of the resource group. The name
+         is case insensitive.
+        :type resource_group_name: str
+        :param private_cloud_name: Name of the private cloud
+        :type private_cloud_name: str
+        :param authorization_name: Name of the ExpressRoute Circuit
+         Authorization in the private cloud
+        :type authorization_name: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: The poller return type is ClientRawResponse, the
+         direct response alongside the deserialized response
+        :param polling: True for ARMPolling, False for no polling, or a
+         polling object for personal polling strategy
+        :return: An instance of LROPoller that returns None or
+         ClientRawResponse<None> if raw==True
+        :rtype: ~msrestazure.azure_operation.AzureOperationPoller[None] or
+         ~msrestazure.azure_operation.AzureOperationPoller[~msrest.pipeline.ClientRawResponse[None]]
+        :raises:
+         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        """
+        raw_result = self._delete_initial(
+            resource_group_name=resource_group_name,
+            private_cloud_name=private_cloud_name,
+            authorization_name=authorization_name,
+            custom_headers=custom_headers,
+            raw=True,
+            **operation_config
+        )
+
+        def get_long_running_output(response):
+            if raw:
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
+
+        lro_delay = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        if polling is True: polling_method = ARMPolling(lro_delay, **operation_config)
+        elif polling is False: polling_method = NoPolling()
+        else: polling_method = polling
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+    delete.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/authorizations/{authorizationName}'}

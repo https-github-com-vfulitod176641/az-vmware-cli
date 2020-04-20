@@ -42,10 +42,10 @@ except (SyntaxError, ImportError):
 from .operation_paged import OperationPaged
 from .private_cloud_paged import PrivateCloudPaged
 from .cluster_paged import ClusterPaged
-from .identity_source_paged import IdentitySourcePaged
 from .hcx_enterprise_site_paged import HcxEnterpriseSitePaged
+from .express_route_authorization_paged import ExpressRouteAuthorizationPaged
 from .virtustream_client_enums import (
-    HcxEnterpriseSiteProvisioningState,
+    ExpressRouteAuthorizationProvisioningState,
     SslEnum,
     PrivateCloudProvisioningState,
     InternetEnum,
@@ -73,9 +73,9 @@ __all__ = [
     'OperationPaged',
     'PrivateCloudPaged',
     'ClusterPaged',
-    'IdentitySourcePaged',
     'HcxEnterpriseSitePaged',
-    'HcxEnterpriseSiteProvisioningState',
+    'ExpressRouteAuthorizationPaged',
+    'ExpressRouteAuthorizationProvisioningState',
     'SslEnum',
     'PrivateCloudProvisioningState',
     'InternetEnum',

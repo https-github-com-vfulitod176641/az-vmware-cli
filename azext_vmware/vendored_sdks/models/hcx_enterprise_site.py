@@ -20,10 +20,6 @@ class HcxEnterpriseSite(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar provisioning_state: The state of the HCX Enterprise Site
-     provisioning. Possible values include: 'Succeeded', 'Failed', 'Updating'
-    :vartype provisioning_state: str or
-     ~vendored_sdks.models.HcxEnterpriseSiteProvisioningState
     :ivar activation_key: The activation key
     :vartype activation_key: str
     :ivar status: The status of the HCX Enterprise Site. Possible values
@@ -35,7 +31,6 @@ class HcxEnterpriseSite(Resource):
         'id': {'readonly': True},
         'name': {'readonly': True},
         'type': {'readonly': True},
-        'provisioning_state': {'readonly': True},
         'activation_key': {'readonly': True},
         'status': {'readonly': True},
     }
@@ -44,13 +39,11 @@ class HcxEnterpriseSite(Resource):
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'activation_key': {'key': 'properties.activationKey', 'type': 'str'},
         'status': {'key': 'properties.status', 'type': 'str'},
     }
 
     def __init__(self, **kwargs):
         super(HcxEnterpriseSite, self).__init__(**kwargs)
-        self.provisioning_state = None
         self.activation_key = None
         self.status = None

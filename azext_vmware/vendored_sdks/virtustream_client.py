@@ -12,8 +12,8 @@ from .version import VERSION
 from .operations.operations import Operations
 from .operations.private_clouds_operations import PrivateCloudsOperations
 from .operations.clusters_operations import ClustersOperations
-from .operations.identity_sources_operations import IdentitySourcesOperations
 from .operations.hcx_enterprise_sites_operations import HcxEnterpriseSitesOperations
+from .operations.express_route_authorizations_operations import ExpressRouteAuthorizationsOperations
 from . import models
 
 
@@ -25,7 +25,7 @@ class VirtustreamClientConfiguration(AzureConfiguration):
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
-    :param subscription_id: Unique identifier for the Azure subscription
+    :param subscription_id: The ID of the target subscription.
     :type subscription_id: str
     :param str base_url: Service URL
     """
@@ -61,15 +61,15 @@ class VirtustreamClient(SDKClient):
     :vartype private_clouds: vendored_sdks.operations.PrivateCloudsOperations
     :ivar clusters: Clusters operations
     :vartype clusters: vendored_sdks.operations.ClustersOperations
-    :ivar identity_sources: IdentitySources operations
-    :vartype identity_sources: vendored_sdks.operations.IdentitySourcesOperations
     :ivar hcx_enterprise_sites: HcxEnterpriseSites operations
     :vartype hcx_enterprise_sites: vendored_sdks.operations.HcxEnterpriseSitesOperations
+    :ivar express_route_authorizations: ExpressRouteAuthorizations operations
+    :vartype express_route_authorizations: vendored_sdks.operations.ExpressRouteAuthorizationsOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
-    :param subscription_id: Unique identifier for the Azure subscription
+    :param subscription_id: The ID of the target subscription.
     :type subscription_id: str
     :param str base_url: Service URL
     """
@@ -91,7 +91,7 @@ class VirtustreamClient(SDKClient):
             self._client, self.config, self._serialize, self._deserialize)
         self.clusters = ClustersOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.identity_sources = IdentitySourcesOperations(
-            self._client, self.config, self._serialize, self._deserialize)
         self.hcx_enterprise_sites = HcxEnterpriseSitesOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.express_route_authorizations = ExpressRouteAuthorizationsOperations(
             self._client, self.config, self._serialize, self._deserialize)

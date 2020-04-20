@@ -8,13 +8,13 @@
 from .operations import Operations
 from .private_clouds_operations import PrivateCloudsOperations
 from .clusters_operations import ClustersOperations
-from .identity_sources_operations import IdentitySourcesOperations
 from .hcx_enterprise_sites_operations import HcxEnterpriseSitesOperations
+from .express_route_authorizations_operations import ExpressRouteAuthorizationsOperations
 
 __all__ = [
     'Operations',
     'PrivateCloudsOperations',
     'ClustersOperations',
-    'IdentitySourcesOperations',
     'HcxEnterpriseSitesOperations',
+    'ExpressRouteAuthorizationsOperations',
 ]
