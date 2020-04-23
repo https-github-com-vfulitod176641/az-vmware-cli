@@ -21,9 +21,6 @@ class Circuit(Model):
     :ivar express_route_id: Identifier of the ExpressRoute Circuit (Microsoft
      Colo only)
     :vartype express_route_id: str
-    :ivar authorizations: Authorization identifiers for the ExpressRoute
-     Circuit (Microsoft Colo only)
-    :vartype authorizations: list[str]
     :ivar express_route_private_peering_id: ExpressRoute Circuit private
      peering identifier
     :vartype express_route_private_peering_id: str
@@ -33,7 +30,6 @@ class Circuit(Model):
         'primary_subnet': {'readonly': True},
         'secondary_subnet': {'readonly': True},
         'express_route_id': {'readonly': True},
-        'authorizations': {'readonly': True},
         'express_route_private_peering_id': {'readonly': True},
     }
 
@@ -41,7 +37,6 @@ class Circuit(Model):
         'primary_subnet': {'key': 'primarySubnet', 'type': 'str'},
         'secondary_subnet': {'key': 'secondarySubnet', 'type': 'str'},
         'express_route_id': {'key': 'expressRouteID', 'type': 'str'},
-        'authorizations': {'key': 'authorizations', 'type': '[str]'},
         'express_route_private_peering_id': {'key': 'expressRoutePrivatePeeringID', 'type': 'str'},
     }
 
@@ -50,5 +45,4 @@ class Circuit(Model):
         self.primary_subnet = None
         self.secondary_subnet = None
         self.express_route_id = None
-        self.authorizations = None
         self.express_route_private_peering_id = None

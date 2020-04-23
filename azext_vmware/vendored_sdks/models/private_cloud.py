@@ -35,8 +35,6 @@ class PrivateCloud(TrackedResource):
     :type circuit: ~vendored_sdks.models.Circuit
     :param cluster: The default cluster used for management
     :type cluster: ~vendored_sdks.models.DefaultClusterProperties
-    :ivar clusters: The clusters
-    :vartype clusters: list[str]
     :ivar endpoints: The endpoints
     :vartype endpoints: ~vendored_sdks.models.Endpoints
     :param internet: Connectivity to internet is enabled or disabled. Possible
@@ -71,8 +69,6 @@ class PrivateCloud(TrackedResource):
     :type nsxt_password: str
     :ivar hcx_cloud_manager_ip: The IP address of the HCX Cloud Manager
     :vartype hcx_cloud_manager_ip: str
-    :ivar hcx_enterprise_sites: The HCX Enterprise Sites
-    :vartype hcx_enterprise_sites: list[str]
     """
 
     _validation = {
@@ -80,7 +76,6 @@ class PrivateCloud(TrackedResource):
         'name': {'readonly': True},
         'type': {'readonly': True},
         'provisioning_state': {'readonly': True},
-        'clusters': {'readonly': True},
         'endpoints': {'readonly': True},
         'management_network': {'readonly': True},
         'vcenter_certificate_thumbprint': {'readonly': True},
@@ -88,7 +83,6 @@ class PrivateCloud(TrackedResource):
         'provisioning_network': {'readonly': True},
         'vmotion_network': {'readonly': True},
         'hcx_cloud_manager_ip': {'readonly': True},
-        'hcx_enterprise_sites': {'readonly': True},
     }
 
     _attribute_map = {
@@ -101,7 +95,6 @@ class PrivateCloud(TrackedResource):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'circuit': {'key': 'properties.circuit', 'type': 'Circuit'},
         'cluster': {'key': 'properties.cluster', 'type': 'DefaultClusterProperties'},
-        'clusters': {'key': 'properties.clusters', 'type': '[str]'},
         'endpoints': {'key': 'properties.endpoints', 'type': 'Endpoints'},
         'internet': {'key': 'properties.internet', 'type': 'str'},
         'identity_sources': {'key': 'properties.identitySources', 'type': '[IdentitySource]'},
@@ -114,7 +107,6 @@ class PrivateCloud(TrackedResource):
         'vcenter_password': {'key': 'properties.vcenterPassword', 'type': 'str'},
         'nsxt_password': {'key': 'properties.nsxtPassword', 'type': 'str'},
         'hcx_cloud_manager_ip': {'key': 'properties.hcxCloudManagerIP', 'type': 'str'},
-        'hcx_enterprise_sites': {'key': 'properties.hcxEnterpriseSites', 'type': '[str]'},
     }
 
     def __init__(self, **kwargs):
@@ -123,7 +115,6 @@ class PrivateCloud(TrackedResource):
         self.provisioning_state = None
         self.circuit = kwargs.get('circuit', None)
         self.cluster = kwargs.get('cluster', None)
-        self.clusters = None
         self.endpoints = None
         self.internet = kwargs.get('internet', None)
         self.identity_sources = kwargs.get('identity_sources', None)
@@ -136,4 +127,3 @@ class PrivateCloud(TrackedResource):
         self.vcenter_password = kwargs.get('vcenter_password', None)
         self.nsxt_password = kwargs.get('nsxt_password', None)
         self.hcx_cloud_manager_ip = None
-        self.hcx_enterprise_sites = None
