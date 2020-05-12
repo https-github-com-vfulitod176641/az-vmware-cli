@@ -15,7 +15,7 @@ def privatecloud_list(cmd, client: AVSClient, resource_group_name=None):
 def privatecloud_show(cmd, client: AVSClient, resource_group_name, name):
     return client.private_clouds.get(resource_group_name, name)
 
-def privatecloud_create(cmd, client: VirtustreamClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
+def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
     from azext_vmware.vendored_sdks.models import PrivateCloud, Circuit, DefaultClusterProperties, Sku
 def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
     from azext_vmware.vendored_sdks.models import PrivateCloud, PrivateCloudProperties, Circuit, DefaultClusterProperties, Sku
