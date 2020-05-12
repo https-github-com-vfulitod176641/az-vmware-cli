@@ -100,7 +100,7 @@ class HcxEnterpriseSitesOperations(object):
             return client_raw_response
 
         return deserialized
-    list.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites'}
+    list.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites'}
 
     def get(
             self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, custom_headers=None, raw=False, **operation_config):
@@ -166,7 +166,7 @@ class HcxEnterpriseSitesOperations(object):
             return client_raw_response
 
         return deserialized
-    get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
+    get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
 
     def create_or_update(
             self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, custom_headers=None, raw=False, **operation_config):
@@ -234,7 +234,7 @@ class HcxEnterpriseSitesOperations(object):
             return client_raw_response
 
         return deserialized
-    create_or_update.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
+    create_or_update.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
 
     def delete(
             self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, custom_headers=None, raw=False, **operation_config):
@@ -291,4 +291,4 @@ class HcxEnterpriseSitesOperations(object):
         if raw:
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
-    delete.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
+    delete.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}

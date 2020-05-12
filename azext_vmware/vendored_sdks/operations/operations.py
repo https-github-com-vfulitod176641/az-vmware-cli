@@ -89,4 +89,4 @@ class Operations(object):
             return client_raw_response
 
         return deserialized
-    list.metadata = {'url': '/providers/Microsoft.VMwareVirtustream/operations'}
+    list.metadata = {'url': '/providers/Microsoft.AVS/operations'}

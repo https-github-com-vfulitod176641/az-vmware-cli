@@ -8,6 +8,12 @@
 from enum import Enum
 
 
+class QuotaEnabled(str, Enum):
+
+    enabled = "Enabled"
+    disabled = "Disabled"
+
+
 class ExpressRouteAuthorizationProvisioningState(str, Enum):
 
     succeeded = "Succeeded"

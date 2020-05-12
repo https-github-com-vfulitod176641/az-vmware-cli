@@ -50,12 +50,6 @@ class PrivateCloud(TrackedResource):
     :ivar management_network: Network used to access vCenter Server and NSX-T
      Manager
     :vartype management_network: str
-    :ivar vcenter_certificate_thumbprint: Thumbprint of the vCenter Server SSL
-     certificate
-    :vartype vcenter_certificate_thumbprint: str
-    :ivar nsxt_certificate_thumbprint: Thumprint of the NSX-T Manager SSL
-     certificate
-    :vartype nsxt_certificate_thumbprint: str
     :ivar provisioning_network: Used for virtual machine cold migration,
      cloning, and snapshot migration
     :vartype provisioning_network: str
@@ -67,6 +61,12 @@ class PrivateCloud(TrackedResource):
     :param nsxt_password: Optionally, set the NSX-T Manager password when the
      private cloud is created
     :type nsxt_password: str
+    :ivar vcenter_certificate_thumbprint: Thumbprint of the vCenter Server SSL
+     certificate
+    :vartype vcenter_certificate_thumbprint: str
+    :ivar nsxt_certificate_thumbprint: Thumbprint of the NSX-T Manager SSL
+     certificate
+    :vartype nsxt_certificate_thumbprint: str
     :ivar hcx_cloud_manager_ip: The IP address of the HCX Cloud Manager
     :vartype hcx_cloud_manager_ip: str
     """
@@ -78,10 +78,10 @@ class PrivateCloud(TrackedResource):
         'provisioning_state': {'readonly': True},
         'endpoints': {'readonly': True},
         'management_network': {'readonly': True},
-        'vcenter_certificate_thumbprint': {'readonly': True},
-        'nsxt_certificate_thumbprint': {'readonly': True},
         'provisioning_network': {'readonly': True},
         'vmotion_network': {'readonly': True},
+        'vcenter_certificate_thumbprint': {'readonly': True},
+        'nsxt_certificate_thumbprint': {'readonly': True},
         'hcx_cloud_manager_ip': {'readonly': True},
     }
 
@@ -100,12 +100,12 @@ class PrivateCloud(TrackedResource):
         'identity_sources': {'key': 'properties.identitySources', 'type': '[IdentitySource]'},
         'network_block': {'key': 'properties.networkBlock', 'type': 'str'},
         'management_network': {'key': 'properties.managementNetwork', 'type': 'str'},
-        'vcenter_certificate_thumbprint': {'key': 'properties.vcenterCertificateThumbprint', 'type': 'str'},
-        'nsxt_certificate_thumbprint': {'key': 'properties.nsxtCertificateThumbprint', 'type': 'str'},
         'provisioning_network': {'key': 'properties.provisioningNetwork', 'type': 'str'},
         'vmotion_network': {'key': 'properties.vmotionNetwork', 'type': 'str'},
         'vcenter_password': {'key': 'properties.vcenterPassword', 'type': 'str'},
         'nsxt_password': {'key': 'properties.nsxtPassword', 'type': 'str'},
+        'vcenter_certificate_thumbprint': {'key': 'properties.vcenterCertificateThumbprint', 'type': 'str'},
+        'nsxt_certificate_thumbprint': {'key': 'properties.nsxtCertificateThumbprint', 'type': 'str'},
         'hcx_cloud_manager_ip': {'key': 'properties.hcxCloudManagerIP', 'type': 'str'},
     }
 
@@ -120,10 +120,10 @@ class PrivateCloud(TrackedResource):
         self.identity_sources = kwargs.get('identity_sources', None)
         self.network_block = kwargs.get('network_block', None)
         self.management_network = None
-        self.vcenter_certificate_thumbprint = None
-        self.nsxt_certificate_thumbprint = None
         self.provisioning_network = None
         self.vmotion_network = None
         self.vcenter_password = kwargs.get('vcenter_password', None)
         self.nsxt_password = kwargs.get('nsxt_password', None)
+        self.vcenter_certificate_thumbprint = None
+        self.nsxt_certificate_thumbprint = None
         self.hcx_cloud_manager_ip = None

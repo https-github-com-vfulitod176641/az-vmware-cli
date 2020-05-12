@@ -1,6 +1,5 @@
 # coding=utf-8
 # --------------------------------------------------------------------------------------------
-# Copyright (c) 2019 Virtustream Corporation.
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 # --------------------------------------------------------------------------------------------
@@ -136,4 +135,9 @@ helps['vmware hcx-enterprise-site show'] = """
 helps['vmware hcx-enterprise-site delete'] = """
     type: command
     short-summary: Delete an HCX Enterprise Site in a private cloud.
+"""
+
+helps['vmware checkquotaavailability'] = """
+    type: command
+    short-summary: Return quota for subscription by region.
 """

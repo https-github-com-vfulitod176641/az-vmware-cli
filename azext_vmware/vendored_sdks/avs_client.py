@@ -10,6 +10,7 @@ from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .version import VERSION
 from .operations.operations import Operations
+from .operations.locations_operations import LocationsOperations
 from .operations.private_clouds_operations import PrivateCloudsOperations
 from .operations.clusters_operations import ClustersOperations
 from .operations.hcx_enterprise_sites_operations import HcxEnterpriseSitesOperations
@@ -17,8 +18,8 @@ from .operations.express_route_authorizations_operations import ExpressRouteAuth
 from . import models
 
 
-class VirtustreamClientConfiguration(AzureConfiguration):
-    """Configuration for VirtustreamClient
+class AVSClientConfiguration(AzureConfiguration):
+    """Configuration for AVSClient
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
@@ -40,23 +41,25 @@ class VirtustreamClientConfiguration(AzureConfiguration):
         if not base_url:
             base_url = 'https://management.azure.com'
 
-        super(VirtustreamClientConfiguration, self).__init__(base_url)
+        super(AVSClientConfiguration, self).__init__(base_url)
 
-        self.add_user_agent('virtustreamclient/{}'.format(VERSION))
+        self.add_user_agent('avsclient/{}'.format(VERSION))
         self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.subscription_id = subscription_id
 
 
-class VirtustreamClient(SDKClient):
-    """Azure VMware Solution by Virtustream API
+class AVSClient(SDKClient):
+    """Azure VMware Solution API
 
     :ivar config: Configuration for client.
-    :vartype config: VirtustreamClientConfiguration
+    :vartype config: AVSClientConfiguration
 
     :ivar operations: Operations operations
     :vartype operations: vendored_sdks.operations.Operations
+    :ivar locations: Locations operations
+    :vartype locations: vendored_sdks.operations.LocationsOperations
     :ivar private_clouds: PrivateClouds operations
     :vartype private_clouds: vendored_sdks.operations.PrivateCloudsOperations
     :ivar clusters: Clusters operations
@@ -77,8 +80,8 @@ class VirtustreamClient(SDKClient):
     def __init__(
             self, credentials, subscription_id, base_url=None):
 
-        self.config = VirtustreamClientConfiguration(credentials, subscription_id, base_url)
-        super(VirtustreamClient, self).__init__(self.config.credentials, self.config)
+        self.config = AVSClientConfiguration(credentials, subscription_id, base_url)
+        super(AVSClient, self).__init__(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self.api_version = '2020-03-20-preview'
@@ -86,6 +89,8 @@ class VirtustreamClient(SDKClient):
         self._deserialize = Deserializer(client_models)
 
         self.operations = Operations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.locations = LocationsOperations(
             self._client, self.config, self._serialize, self._deserialize)
         self.private_clouds = PrivateCloudsOperations(
             self._client, self.config, self._serialize, self._deserialize)

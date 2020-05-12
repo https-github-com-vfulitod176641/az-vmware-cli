@@ -6,6 +6,7 @@
 # --------------------------------------------------------------------------
 
 try:
+    from .quota_py3 import Quota
     from .resource_py3 import Resource
     from .tracked_resource_py3 import TrackedResource
     from .api_error_base_py3 import ApiErrorBase
@@ -23,6 +24,7 @@ try:
     from .admin_credentials_py3 import AdminCredentials
     from .hcx_enterprise_site_py3 import HcxEnterpriseSite
 except (SyntaxError, ImportError):
+    from .quota import Quota
     from .resource import Resource
     from .tracked_resource import TrackedResource
     from .api_error_base import ApiErrorBase
@@ -44,7 +46,8 @@ from .private_cloud_paged import PrivateCloudPaged
 from .cluster_paged import ClusterPaged
 from .hcx_enterprise_site_paged import HcxEnterpriseSitePaged
 from .express_route_authorization_paged import ExpressRouteAuthorizationPaged
-from .virtustream_client_enums import (
+from .avs_client_enums import (
+    QuotaEnabled,
     ExpressRouteAuthorizationProvisioningState,
     SslEnum,
     PrivateCloudProvisioningState,
@@ -54,6 +57,7 @@ from .virtustream_client_enums import (
 )
 
 __all__ = [
+    'Quota',
     'Resource',
     'TrackedResource',
     'ApiErrorBase',
@@ -75,6 +79,7 @@ __all__ = [
     'ClusterPaged',
     'HcxEnterpriseSitePaged',
     'ExpressRouteAuthorizationPaged',
+    'QuotaEnabled',
     'ExpressRouteAuthorizationProvisioningState',
     'SslEnum',
     'PrivateCloudProvisioningState',
