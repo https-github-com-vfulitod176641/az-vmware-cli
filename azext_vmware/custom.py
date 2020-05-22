@@ -16,7 +16,7 @@ def privatecloud_show(cmd, client: AVSClient, resource_group_name, name):
     return client.private_clouds.get(resource_group_name, name)
 
 def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
-    from azext_vmware.vendored_sdks.models import PrivateCloud, PrivateCloudProperties, Circuit, DefaultClusterProperties, Sku
+    from azext_vmware.vendored_sdks.models import PrivateCloud, Circuit, DefaultClusterProperties, Sku
     if circuit_primary_subnet is not None or circuit_secondary_subnet is not None:
         circuit = Circuit(primary_subnet=circuit_primary_subnet, secondary_subnet=circuit_secondary_subnet)
     else:
