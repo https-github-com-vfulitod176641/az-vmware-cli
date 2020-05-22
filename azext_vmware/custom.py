@@ -16,8 +16,6 @@ def privatecloud_show(cmd, client: AVSClient, resource_group_name, name):
     return client.private_clouds.get(resource_group_name, name)
 
 def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
-    from azext_vmware.vendored_sdks.models import PrivateCloud, Circuit, DefaultClusterProperties, Sku
-def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
     from azext_vmware.vendored_sdks.models import PrivateCloud, PrivateCloudProperties, Circuit, DefaultClusterProperties, Sku
     if circuit_primary_subnet is not None or circuit_secondary_subnet is not None:
         circuit = Circuit(primary_subnet=circuit_primary_subnet, secondary_subnet=circuit_secondary_subnet)
@@ -108,3 +106,32 @@ def cluster_delete(cmd, client: AVSClient, resource_group_name, private_cloud, n
 
 def check_quota_availability(cmd, client: AVSClient, location):
     return client.check_quota_availability(location)
+
+
+def authorization_create(cmd, client: AVSClient, resource_group_name, private_cloud, name):
+    from azext_vmware.vendored_sdks.models import ExpressRouteAuthorization	
+    identity_source = ExpressRouteAuthorization(name=name)	
+    return client.express_route_authorizations.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, identity_source_name=name, identity_source=identity_source)	
+
+def authorization_list(cmd, client: AVSClient, resource_group_name, private_cloud):	
+    return client.express_route_authorizations.list(resource_group_name=resource_group_name, private_cloud_name=private_cloud)	
+
+def authorization_show(cmd, client: AVSClient, resource_group_name, private_cloud, name):	
+    return client.express_route_authorizations.get(resource_group_name=resource_group_name, private_cloud_name=private_cloud, identitysource_name=name)	
+
+def authorization_delete(cmd, client: AVSClient, resource_group_name, private_cloud, name):	
+    return client.express_route_authorizations.delete(resource_group_name=resource_group_name, private_cloud_name=private_cloud, identitysource_name=name)	
+
+
+def hcxenterprisesite_create(cmd, client: AVSClient, resource_group_name, name, private_cloud, size, tags=[]):	
+    from azext_vmware.vendored_sdks.models import HcxEnterpriseSite	
+    return client.hcx_enterprise_sites.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, hcx_enterprise_site_name=name)	
+
+def hcxenterprisesite_list(cmd, client: AVSClient, resource_group_name, private_cloud):	
+    return client.hcx_enterprise_sites.list(resource_group_name=resource_group_name, private_cloud_name=private_cloud)	
+
+def hcxenterprisesite_show(cmd, client: AVSClient, resource_group_name, private_cloud, name):	
+    return client.hcx_enterprise_sites.get(resource_group_name=resource_group_name, private_cloud_name=private_cloud, hcx_enterprise_site_name=name)	
+
+def hcxenterprisesite_delete(cmd, client: AVSClient, resource_group_name, private_cloud, name):	
+    return client.hcx_enterprise_sites.delete(resource_group_name=resource_group_name, private_cloud_name=private_cloud, hcx_enterprise_site_name=name)

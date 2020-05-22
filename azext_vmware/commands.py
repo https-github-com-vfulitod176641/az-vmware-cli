@@ -41,5 +41,6 @@ def load_command_table(self, _):
         g.custom_command('list', 'hcxenterprisesite_list')
         g.custom_command('delete', 'hcxenterprisesite_delete')
         g.custom_command('show', 'hcxenterprisesite_show')
+    
     with self.command_group('vmware', vmware_sdk, client_factory=cf_vmware) as g:
         g.custom_command('checkquotaavailability', 'check_quota_availability')
