@@ -14,7 +14,7 @@ from .operations.locations_operations import LocationsOperations
 from .operations.private_clouds_operations import PrivateCloudsOperations
 from .operations.clusters_operations import ClustersOperations
 from .operations.hcx_enterprise_sites_operations import HcxEnterpriseSitesOperations
-from .operations.express_route_authorizations_operations import ExpressRouteAuthorizationsOperations
+from .operations.authorizations_operations import AuthorizationsOperations
 from . import models
 
 
@@ -66,8 +66,8 @@ class AVSClient(SDKClient):
     :vartype clusters: vendored_sdks.operations.ClustersOperations
     :ivar hcx_enterprise_sites: HcxEnterpriseSites operations
     :vartype hcx_enterprise_sites: vendored_sdks.operations.HcxEnterpriseSitesOperations
-    :ivar express_route_authorizations: ExpressRouteAuthorizations operations
-    :vartype express_route_authorizations: vendored_sdks.operations.ExpressRouteAuthorizationsOperations
+    :ivar authorizations: Authorizations operations
+    :vartype authorizations: vendored_sdks.operations.AuthorizationsOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
@@ -98,5 +98,5 @@ class AVSClient(SDKClient):
             self._client, self.config, self._serialize, self._deserialize)
         self.hcx_enterprise_sites = HcxEnterpriseSitesOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.express_route_authorizations = ExpressRouteAuthorizationsOperations(
+        self.authorizations = AuthorizationsOperations(
             self._client, self.config, self._serialize, self._deserialize)

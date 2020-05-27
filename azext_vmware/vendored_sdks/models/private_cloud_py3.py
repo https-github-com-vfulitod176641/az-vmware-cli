@@ -33,8 +33,8 @@ class PrivateCloud(TrackedResource):
      ~vendored_sdks.models.PrivateCloudProvisioningState
     :param circuit: An ExpressRoute Circuit
     :type circuit: ~vendored_sdks.models.Circuit
-    :param cluster: The default cluster used for management
-    :type cluster: ~vendored_sdks.models.DefaultClusterProperties
+    :param management_cluster: The default cluster used for management
+    :type management_cluster: ~vendored_sdks.models.DefaultClusterProperties
     :ivar endpoints: The endpoints
     :vartype endpoints: ~vendored_sdks.models.Endpoints
     :param internet: Connectivity to internet is enabled or disabled. Possible
@@ -94,7 +94,7 @@ class PrivateCloud(TrackedResource):
         'sku': {'key': 'sku', 'type': 'Sku'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'circuit': {'key': 'properties.circuit', 'type': 'Circuit'},
-        'cluster': {'key': 'properties.cluster', 'type': 'DefaultClusterProperties'},
+        'management_cluster': {'key': 'properties.managementCluster', 'type': 'DefaultClusterProperties'},
         'endpoints': {'key': 'properties.endpoints', 'type': 'Endpoints'},
         'internet': {'key': 'properties.internet', 'type': 'str'},
         'identity_sources': {'key': 'properties.identitySources', 'type': '[IdentitySource]'},
@@ -109,12 +109,12 @@ class PrivateCloud(TrackedResource):
         'hcx_cloud_manager_ip': {'key': 'properties.hcxCloudManagerIP', 'type': 'str'},
     }
 
-    def __init__(self, *, location: str=None, tags=None, sku=None, circuit=None, cluster=None, internet=None, identity_sources=None, network_block: str=None, vcenter_password: str=None, nsxt_password: str=None, **kwargs) -> None:
+    def __init__(self, *, location: str=None, tags=None, sku=None, circuit=None, management_cluster=None, internet=None, identity_sources=None, network_block: str=None, vcenter_password: str=None, nsxt_password: str=None, **kwargs) -> None:
         super(PrivateCloud, self).__init__(location=location, tags=tags, **kwargs)
         self.sku = sku
         self.provisioning_state = None
         self.circuit = circuit
-        self.cluster = cluster
+        self.management_cluster = management_cluster
         self.endpoints = None
         self.internet = internet
         self.identity_sources = identity_sources

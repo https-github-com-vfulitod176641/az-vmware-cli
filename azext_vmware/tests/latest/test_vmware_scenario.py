@@ -66,7 +66,7 @@ class AsyncScenarioTest(ScenarioTest):
 # On create, the state switches from 'Building' to 'Succeeded'.
 # On add and delete authorization from 'updating' to 'Succeeded'.
 def provissioning_succeeded(rslt):
-    state = rslt.get_output_in_json()['properties']['provisioningState']
+    state = rslt.get_output_in_json()['provisioningState']
     # print(state)
     return state == 'Succeeded'
 
@@ -113,21 +113,17 @@ class VmwareScenarioTest(AsyncScenarioTest):
         # update private cloud to enable internet
         self.cmd('vmware private-cloud update -g {rg} -n {privatecloud} --internet enabled')
 
-        # add authorization
-        self.cmd('vmware private-cloud addauthorization -g {rg} -c {privatecloud} -n myauthname')
-        await self.poll_until_result(lambda: self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}'), provissioning_succeeded)
+        # create authorization
+        self.cmd('vmware authorization create -g {rg} -c {privatecloud} -n myauthname')
 
         # delete authorization
-        self.cmd('vmware private-cloud deleteauthorization -g {rg} -c {privatecloud} -n myauthname')
-        await self.poll_until_result(lambda: self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}'), provissioning_succeeded)
+        self.cmd('vmware authorization delete -g {rg} -c {privatecloud} -n myauthname')
 
         # add identity source
         self.cmd('vmware private-cloud addidentitysource -g {rg} -c {privatecloud} -n groupName --alias groupAlias --domain domain --base-user-dn "ou=baseUser" --base-group-dn "ou=baseGroup" --primary-server ldaps://1.1.1.1:636 --username someone --password something')
-        await self.poll_until_result(lambda: self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}'), provissioning_succeeded)
 
         # delete identity source
         self.cmd('vmware private-cloud deleteidentitysource -g {rg} -c {privatecloud} -n groupName --alias groupAlias --domain domain')
-        await self.poll_until_result(lambda: self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}'), provissioning_succeeded)
 
         # cluster list should report 0
         count = len(self.cmd('vmware cluster list -g {rg} -c {privatecloud}').get_output_in_json())
@@ -135,7 +131,6 @@ class VmwareScenarioTest(AsyncScenarioTest):
 
         # cluster create
         self.cmd('vmware cluster create -g {rg} -c {privatecloud} -n {cluster} --size 3')
-        await self.poll_until_result(lambda: self.cmd('vmware cluster show -g {rg} -c {privatecloud} -n {cluster}'), provissioning_succeeded)
 
         # cluster list should report 1
         count = len(self.cmd('vmware cluster list -g {rg} -c {privatecloud}').get_output_in_json())
@@ -143,11 +138,9 @@ class VmwareScenarioTest(AsyncScenarioTest):
 
         # cluster update
         self.cmd('vmware cluster update -g {rg} -c {privatecloud} -n {cluster} --size 4')
-        await self.poll_until_result(lambda: self.cmd('vmware cluster show -g {rg} -c {privatecloud} -n {cluster}'), provissioning_succeeded)
 
         # cluster delete
         self.cmd('vmware cluster delete -g {rg} -c {privatecloud} -n {cluster}')
-        await self.poll_until_result(lambda: self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}'), provissioning_succeeded)
 
         # delete the private cloud
         self.cmd('vmware private-cloud delete -g {rg} -n {privatecloud}')
@@ -156,4 +149,8 @@ class VmwareScenarioTest(AsyncScenarioTest):
         self.assertEqual(count, 0, 'private cloud count expected to be 0')
 
         # it should throw ResourceNotFound
-        await self.poll_until_exception(lambda: self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}'), ApiErrorException)
+        try:
+            self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}')
+            raise Exception("private cloud ResourceNotFound expected")
+        except ApiErrorException:
+            pass

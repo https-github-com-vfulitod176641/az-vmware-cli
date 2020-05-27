@@ -13,8 +13,8 @@ from msrestazure.polling.arm_polling import ARMPolling
 from .. import models
 
 
-class ExpressRouteAuthorizationsOperations(object):
-    """ExpressRouteAuthorizationsOperations operations.
+class AuthorizationsOperations(object):
+    """AuthorizationsOperations operations.
 
     :param client: Client for service requests.
     :param config: Configuration of service client.
@@ -173,6 +173,8 @@ class ExpressRouteAuthorizationsOperations(object):
 
     def _create_or_update_initial(
             self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, **operation_config):
+        authorization = None
+
         # Construct URL
         url = self.create_or_update.metadata['url']
         path_format_arguments = {
@@ -190,6 +192,7 @@ class ExpressRouteAuthorizationsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         if self.config.generate_client_request_id:
             header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
@@ -197,8 +200,11 @@ class ExpressRouteAuthorizationsOperations(object):
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
+        # Construct body
+        body_content = self._serialize.body(authorization, 'ExpressRouteAuthorization')
+
         # Construct and send request
-        request = self._client.put(url, query_parameters, header_parameters)
+        request = self._client.put(url, query_parameters, header_parameters, body_content)
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 201]:

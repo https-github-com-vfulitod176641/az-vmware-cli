@@ -33,8 +33,8 @@ class PrivateCloud(TrackedResource):
      ~vendored_sdks.models.PrivateCloudProvisioningState
     :param circuit: An ExpressRoute Circuit
     :type circuit: ~vendored_sdks.models.Circuit
-    :param cluster: The default cluster used for management
-    :type cluster: ~vendored_sdks.models.DefaultClusterProperties
+    :param management_cluster: The default cluster used for management
+    :type management_cluster: ~vendored_sdks.models.DefaultClusterProperties
     :ivar endpoints: The endpoints
     :vartype endpoints: ~vendored_sdks.models.Endpoints
     :param internet: Connectivity to internet is enabled or disabled. Possible
@@ -94,7 +94,7 @@ class PrivateCloud(TrackedResource):
         'sku': {'key': 'sku', 'type': 'Sku'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'circuit': {'key': 'properties.circuit', 'type': 'Circuit'},
-        'cluster': {'key': 'properties.cluster', 'type': 'DefaultClusterProperties'},
+        'management_cluster': {'key': 'properties.managementCluster', 'type': 'DefaultClusterProperties'},
         'endpoints': {'key': 'properties.endpoints', 'type': 'Endpoints'},
         'internet': {'key': 'properties.internet', 'type': 'str'},
         'identity_sources': {'key': 'properties.identitySources', 'type': '[IdentitySource]'},
@@ -114,7 +114,7 @@ class PrivateCloud(TrackedResource):
         self.sku = kwargs.get('sku', None)
         self.provisioning_state = None
         self.circuit = kwargs.get('circuit', None)
-        self.cluster = kwargs.get('cluster', None)
+        self.management_cluster = kwargs.get('management_cluster', None)
         self.endpoints = None
         self.internet = kwargs.get('internet', None)
         self.identity_sources = kwargs.get('identity_sources', None)

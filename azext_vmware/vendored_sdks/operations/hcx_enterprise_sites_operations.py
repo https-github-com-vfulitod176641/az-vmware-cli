@@ -191,6 +191,8 @@ class HcxEnterpriseSitesOperations(object):
         :raises:
          :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
         """
+        hcx_enterprise_site = None
+
         # Construct URL
         url = self.create_or_update.metadata['url']
         path_format_arguments = {
@@ -208,6 +210,7 @@ class HcxEnterpriseSitesOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         if self.config.generate_client_request_id:
             header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
@@ -215,8 +218,11 @@ class HcxEnterpriseSitesOperations(object):
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
+        # Construct body
+        body_content = self._serialize.body(hcx_enterprise_site, 'HcxEnterpriseSite')
+
         # Construct and send request
-        request = self._client.put(url, query_parameters, header_parameters)
+        request = self._client.put(url, query_parameters, header_parameters, body_content)
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 201]:
