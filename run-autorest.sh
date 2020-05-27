@@ -6,4 +6,4 @@ autorest --input-file=$spec --azure-validator --openapi-type=arm
 # oav validate-spec $spec -p
 # oav validate-example $spec -p
 rm -rf azext_vmware/vendored_sdks/
-autorest --input-file=$spec --python --output-folder=azext_vmware --namespace=vendored_sdks --azure-arm=true --override-client-name=AVSClient --use=@microsoft.azure/autorest.python@~3.0.56
+autorest --input-file=$spec --python --output-folder=azext_vmware --namespace=vendored_sdks --azure-arm=true --override-client-name=AVSClient --use=@microsoft.azure/autorest.python@3.0.62

@@ -172,9 +172,7 @@ class AuthorizationsOperations(object):
 
 
     def _create_or_update_initial(
-            self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, **operation_config):
-        authorization = None
-
+            self, resource_group_name, private_cloud_name, authorization_name, authorization, custom_headers=None, raw=False, **operation_config):
         # Construct URL
         url = self.create_or_update.metadata['url']
         path_format_arguments = {
@@ -224,7 +222,7 @@ class AuthorizationsOperations(object):
         return deserialized
 
     def create_or_update(
-            self, resource_group_name, private_cloud_name, authorization_name, custom_headers=None, raw=False, polling=True, **operation_config):
+            self, resource_group_name, private_cloud_name, authorization_name, authorization, custom_headers=None, raw=False, polling=True, **operation_config):
         """Create or update an ExpressRoute Circuit Authorization in a private
         cloud.
 
@@ -236,6 +234,8 @@ class AuthorizationsOperations(object):
         :param authorization_name: Name of the ExpressRoute Circuit
          Authorization in the private cloud
         :type authorization_name: str
+        :param authorization: An ExpressRoute Circuit Authorization
+        :type authorization: ~vendored_sdks.models.ExpressRouteAuthorization
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: The poller return type is ClientRawResponse, the
          direct response alongside the deserialized response
@@ -255,6 +255,7 @@ class AuthorizationsOperations(object):
             resource_group_name=resource_group_name,
             private_cloud_name=private_cloud_name,
             authorization_name=authorization_name,
+            authorization=authorization,
             custom_headers=custom_headers,
             raw=True,
             **operation_config

@@ -169,7 +169,7 @@ class HcxEnterpriseSitesOperations(object):
     get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}'}
 
     def create_or_update(
-            self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, custom_headers=None, raw=False, **operation_config):
+            self, resource_group_name, private_cloud_name, hcx_enterprise_site_name, hcx_enterprise_site, custom_headers=None, raw=False, **operation_config):
         """Create or update an HCX Enterprise Site in a private cloud.
 
         :param resource_group_name: The name of the resource group. The name
@@ -180,6 +180,8 @@ class HcxEnterpriseSitesOperations(object):
         :param hcx_enterprise_site_name: Name of the HCX Enterprise Site in
          the private cloud
         :type hcx_enterprise_site_name: str
+        :param hcx_enterprise_site: The HCX Enterprise Site
+        :type hcx_enterprise_site: ~vendored_sdks.models.HcxEnterpriseSite
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -191,8 +193,6 @@ class HcxEnterpriseSitesOperations(object):
         :raises:
          :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
         """
-        hcx_enterprise_site = None
-
         # Construct URL
         url = self.create_or_update.metadata['url']
         path_format_arguments = {
