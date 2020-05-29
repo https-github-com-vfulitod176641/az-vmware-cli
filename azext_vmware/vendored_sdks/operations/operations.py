@@ -7,6 +7,7 @@
 
 import uuid
 from msrest.pipeline import ClientRawResponse
+from msrestazure.azure_exceptions import CloudError
 
 from .. import models
 
@@ -44,8 +45,7 @@ class Operations(object):
         :return: An iterator like instance of Operation
         :rtype:
          ~vendored_sdks.models.OperationPaged[~vendored_sdks.models.Operation]
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -76,7 +76,9 @@ class Operations(object):
             response = self._client.send(request, stream=False, **operation_config)
 
             if response.status_code not in [200]:
-                raise models.ApiErrorException(self._deserialize, response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             return response
 

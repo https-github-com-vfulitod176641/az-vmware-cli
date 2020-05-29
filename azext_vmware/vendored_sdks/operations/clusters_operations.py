@@ -7,6 +7,7 @@
 
 import uuid
 from msrest.pipeline import ClientRawResponse
+from msrestazure.azure_exceptions import CloudError
 from msrest.polling import LROPoller, NoPolling
 from msrestazure.polling.arm_polling import ARMPolling
 
@@ -51,8 +52,7 @@ class ClustersOperations(object):
         :return: An iterator like instance of Cluster
         :rtype:
          ~vendored_sdks.models.ClusterPaged[~vendored_sdks.models.Cluster]
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -89,7 +89,9 @@ class ClustersOperations(object):
             response = self._client.send(request, stream=False, **operation_config)
 
             if response.status_code not in [200]:
-                raise models.ApiErrorException(self._deserialize, response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             return response
 
@@ -123,8 +125,7 @@ class ClustersOperations(object):
         :return: Cluster or ClientRawResponse if raw=true
         :rtype: ~vendored_sdks.models.Cluster or
          ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = self.get.metadata['url']
@@ -155,7 +156,9 @@ class ClustersOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -205,7 +208,9 @@ class ClustersOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 201]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -244,8 +249,7 @@ class ClustersOperations(object):
          ~msrestazure.azure_operation.AzureOperationPoller[~vendored_sdks.models.Cluster]
          or
          ~msrestazure.azure_operation.AzureOperationPoller[~msrest.pipeline.ClientRawResponse[~vendored_sdks.models.Cluster]]
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         raw_result = self._create_or_update_initial(
             resource_group_name=resource_group_name,
@@ -311,7 +315,9 @@ class ClustersOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 201]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -350,8 +356,7 @@ class ClustersOperations(object):
          ~msrestazure.azure_operation.AzureOperationPoller[~vendored_sdks.models.Cluster]
          or
          ~msrestazure.azure_operation.AzureOperationPoller[~msrest.pipeline.ClientRawResponse[~vendored_sdks.models.Cluster]]
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         raw_result = self._update_initial(
             resource_group_name=resource_group_name,
@@ -412,7 +417,9 @@ class ClustersOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 202, 204]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
@@ -438,8 +445,7 @@ class ClustersOperations(object):
          ClientRawResponse<None> if raw==True
         :rtype: ~msrestazure.azure_operation.AzureOperationPoller[None] or
          ~msrestazure.azure_operation.AzureOperationPoller[~msrest.pipeline.ClientRawResponse[None]]
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         raw_result = self._delete_initial(
             resource_group_name=resource_group_name,

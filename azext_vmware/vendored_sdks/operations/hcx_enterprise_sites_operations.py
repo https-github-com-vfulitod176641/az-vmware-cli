@@ -7,6 +7,7 @@
 
 import uuid
 from msrest.pipeline import ClientRawResponse
+from msrestazure.azure_exceptions import CloudError
 
 from .. import models
 
@@ -49,8 +50,7 @@ class HcxEnterpriseSitesOperations(object):
         :return: An iterator like instance of HcxEnterpriseSite
         :rtype:
          ~vendored_sdks.models.HcxEnterpriseSitePaged[~vendored_sdks.models.HcxEnterpriseSite]
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -87,7 +87,9 @@ class HcxEnterpriseSitesOperations(object):
             response = self._client.send(request, stream=False, **operation_config)
 
             if response.status_code not in [200]:
-                raise models.ApiErrorException(self._deserialize, response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             return response
 
@@ -122,8 +124,7 @@ class HcxEnterpriseSitesOperations(object):
         :return: HcxEnterpriseSite or ClientRawResponse if raw=true
         :rtype: ~vendored_sdks.models.HcxEnterpriseSite or
          ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = self.get.metadata['url']
@@ -154,7 +155,9 @@ class HcxEnterpriseSitesOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -190,8 +193,7 @@ class HcxEnterpriseSitesOperations(object):
         :return: HcxEnterpriseSite or ClientRawResponse if raw=true
         :rtype: ~vendored_sdks.models.HcxEnterpriseSite or
          ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = self.create_or_update.metadata['url']
@@ -226,7 +228,9 @@ class HcxEnterpriseSitesOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 201]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -261,8 +265,7 @@ class HcxEnterpriseSitesOperations(object):
          overrides<msrest:optionsforoperations>`.
         :return: None or ClientRawResponse if raw=true
         :rtype: None or ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = self.delete.metadata['url']
@@ -292,7 +295,9 @@ class HcxEnterpriseSitesOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 204]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)

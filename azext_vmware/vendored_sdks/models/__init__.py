@@ -9,8 +9,8 @@ try:
     from .quota_py3 import Quota
     from .resource_py3 import Resource
     from .tracked_resource_py3 import TrackedResource
-    from .api_error_base_py3 import ApiErrorBase
-    from .api_error_py3 import ApiError, ApiErrorException
+    from .error_additional_info_py3 import ErrorAdditionalInfo
+    from .error_response_py3 import ErrorResponse
     from .operation_display_py3 import OperationDisplay
     from .operation_py3 import Operation
     from .express_route_authorization_py3 import ExpressRouteAuthorization
@@ -27,8 +27,8 @@ except (SyntaxError, ImportError):
     from .quota import Quota
     from .resource import Resource
     from .tracked_resource import TrackedResource
-    from .api_error_base import ApiErrorBase
-    from .api_error import ApiError, ApiErrorException
+    from .error_additional_info import ErrorAdditionalInfo
+    from .error_response import ErrorResponse
     from .operation_display import OperationDisplay
     from .operation import Operation
     from .express_route_authorization import ExpressRouteAuthorization
@@ -60,8 +60,8 @@ __all__ = [
     'Quota',
     'Resource',
     'TrackedResource',
-    'ApiErrorBase',
-    'ApiError', 'ApiErrorException',
+    'ErrorAdditionalInfo',
+    'ErrorResponse',
     'OperationDisplay',
     'Operation',
     'ExpressRouteAuthorization',

@@ -7,20 +7,20 @@ import os
 import unittest
 
 from azure.cli.testsdk import (ScenarioTest, ResourceGroupPreparer)
-from azext_vmware.vendored_sdks.models import ApiErrorException
+from msrestazure.azure_exceptions import CloudError
 
 class VmwareScenarioTest(ScenarioTest):
 
     @ResourceGroupPreparer(name_prefix='cli_test_vmware')
     def test_vmware(self):
         self.kwargs.update({
-            'loc': 'northcentralus',
+            'loc': 'southcentralus',
             'privatecloud': 'cloud1',
             'cluster': 'cluster1'
         })
 
         # show should throw ResourceNotFound
-        with self.assertRaisesRegexp(ApiErrorException, 'ResourceNotFound'):
+        with self.assertRaisesRegexp(CloudError, 'ResourceNotFound'):
             self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}')
 
         count = len(self.cmd('vmware private-cloud list -g {rg}').get_output_in_json())
@@ -83,5 +83,5 @@ class VmwareScenarioTest(ScenarioTest):
         self.assertEqual(count, 0, 'private cloud count expected to be 0')
 
         # show should throw ResourceNotFound
-        with self.assertRaisesRegexp(ApiErrorException, 'ResourceNotFound'):
+        with self.assertRaisesRegexp(CloudError, 'ResourceNotFound'):
             self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}')

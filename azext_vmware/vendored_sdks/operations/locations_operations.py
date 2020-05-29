@@ -7,6 +7,7 @@
 
 import uuid
 from msrest.pipeline import ClientRawResponse
+from msrestazure.azure_exceptions import CloudError
 
 from .. import models
 
@@ -46,8 +47,7 @@ class LocationsOperations(object):
         :return: Quota or ClientRawResponse if raw=true
         :rtype: ~vendored_sdks.models.Quota or
          ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ApiErrorException<vendored_sdks.models.ApiErrorException>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = self.check_quota_availability.metadata['url']
@@ -76,7 +76,9 @@ class LocationsOperations(object):
         response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200]:
-            raise models.ApiErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
