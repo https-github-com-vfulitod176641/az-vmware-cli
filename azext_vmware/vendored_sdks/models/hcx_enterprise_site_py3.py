@@ -25,8 +25,6 @@ class HcxEnterpriseSite(Resource):
     :ivar status: The status of the HCX Enterprise Site. Possible values
      include: 'Available', 'Consumed', 'Deactivated', 'Deleted'
     :vartype status: str or ~vendored_sdks.models.HcxEnterpriseSiteStatus
-    :param empty: Ignore this property. It helps autorest code generation.
-    :type empty: str
     """
 
     _validation = {
@@ -43,11 +41,9 @@ class HcxEnterpriseSite(Resource):
         'type': {'key': 'type', 'type': 'str'},
         'activation_key': {'key': 'properties.activationKey', 'type': 'str'},
         'status': {'key': 'properties.status', 'type': 'str'},
-        'empty': {'key': 'properties.empty', 'type': 'str'},
     }
 
-    def __init__(self, *, empty: str=None, **kwargs) -> None:
+    def __init__(self, **kwargs) -> None:
         super(HcxEnterpriseSite, self).__init__(**kwargs)
         self.activation_key = None
         self.status = None
-        self.empty = empty

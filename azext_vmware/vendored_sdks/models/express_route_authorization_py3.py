@@ -31,8 +31,6 @@ class ExpressRouteAuthorization(Resource):
     :ivar express_route_authorization_key: The key of the ExpressRoute Circuit
      Authorization
     :vartype express_route_authorization_key: str
-    :param empty: Ignore this property. It helps autorest code generation.
-    :type empty: str
     """
 
     _validation = {
@@ -51,12 +49,10 @@ class ExpressRouteAuthorization(Resource):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'express_route_authorization_id': {'key': 'properties.expressRouteAuthorizationId', 'type': 'str'},
         'express_route_authorization_key': {'key': 'properties.expressRouteAuthorizationKey', 'type': 'str'},
-        'empty': {'key': 'properties.empty', 'type': 'str'},
     }
 
-    def __init__(self, *, empty: str=None, **kwargs) -> None:
+    def __init__(self, **kwargs) -> None:
         super(ExpressRouteAuthorization, self).__init__(**kwargs)
         self.provisioning_state = None
         self.express_route_authorization_id = None
         self.express_route_authorization_key = None
-        self.empty = empty

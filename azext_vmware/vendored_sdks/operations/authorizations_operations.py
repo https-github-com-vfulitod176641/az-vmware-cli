@@ -202,7 +202,7 @@ class AuthorizationsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(authorization, 'ExpressRouteAuthorization')
+        body_content = self._serialize.body(authorization, 'object')
 
         # Construct and send request
         request = self._client.put(url, query_parameters, header_parameters, body_content)
@@ -240,7 +240,7 @@ class AuthorizationsOperations(object):
          Authorization in the private cloud
         :type authorization_name: str
         :param authorization: An ExpressRoute Circuit Authorization
-        :type authorization: ~vendored_sdks.models.ExpressRouteAuthorization
+        :type authorization: object
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: The poller return type is ClientRawResponse, the
          direct response alongside the deserialized response
