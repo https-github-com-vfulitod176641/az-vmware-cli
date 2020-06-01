@@ -8,6 +8,13 @@
 from enum import Enum
 
 
+class TrialStatus(str, Enum):
+
+    trial_available = "TrialAvailable"
+    trial_used = "TrialUsed"
+    trial_disabled = "TrialDisabled"
+
+
 class QuotaEnabled(str, Enum):
 
     enabled = "Enabled"

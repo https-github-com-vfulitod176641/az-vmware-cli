@@ -6,6 +6,7 @@
 # --------------------------------------------------------------------------
 
 try:
+    from .trial_py3 import Trial
     from .quota_py3 import Quota
     from .resource_py3 import Resource
     from .tracked_resource_py3 import TrackedResource
@@ -24,6 +25,7 @@ try:
     from .admin_credentials_py3 import AdminCredentials
     from .hcx_enterprise_site_py3 import HcxEnterpriseSite
 except (SyntaxError, ImportError):
+    from .trial import Trial
     from .quota import Quota
     from .resource import Resource
     from .tracked_resource import TrackedResource
@@ -47,6 +49,7 @@ from .cluster_paged import ClusterPaged
 from .hcx_enterprise_site_paged import HcxEnterpriseSitePaged
 from .express_route_authorization_paged import ExpressRouteAuthorizationPaged
 from .avs_client_enums import (
+    TrialStatus,
     QuotaEnabled,
     ExpressRouteAuthorizationProvisioningState,
     SslEnum,
@@ -57,6 +60,7 @@ from .avs_client_enums import (
 )
 
 __all__ = [
+    'Trial',
     'Quota',
     'Resource',
     'TrackedResource',
@@ -79,6 +83,7 @@ __all__ = [
     'ClusterPaged',
     'HcxEnterpriseSitePaged',
     'ExpressRouteAuthorizationPaged',
+    'TrialStatus',
     'QuotaEnabled',
     'ExpressRouteAuthorizationProvisioningState',
     'SslEnum',
