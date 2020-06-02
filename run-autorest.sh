@@ -1,7 +1,7 @@
 #!/bin/sh -e
 # swagger validation
 # https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist
-spec=/azure-rest-api-specs/specification/vmware/resource-manager/Microsoft.AVS/preview/2020-03-20-preview/vmware.json
+spec=/azure-rest-api-specs/specification/vmware/resource-manager/Microsoft.AVS/stable/2020-03-20/vmware.json
 autorest --input-file=$spec --azure-validator --openapi-type=arm
 oav validate-spec $spec -p
 oav validate-example $spec -p

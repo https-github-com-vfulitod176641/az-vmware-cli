@@ -19,7 +19,7 @@ class LocationsOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An object model deserializer.
-    :ivar api_version: The API version to use for this operation. Constant value: "2020-03-20-preview".
+    :ivar api_version: The API version to use for this operation. Constant value: "2020-03-20".
     """
 
     models = models
@@ -29,7 +29,7 @@ class LocationsOperations(object):
         self._client = client
         self._serialize = serializer
         self._deserialize = deserializer
-        self.api_version = "2020-03-20-preview"
+        self.api_version = "2020-03-20"
 
         self.config = config
 
