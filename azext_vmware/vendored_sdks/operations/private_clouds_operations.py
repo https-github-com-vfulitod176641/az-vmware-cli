@@ -335,7 +335,7 @@ class PrivateCloudsOperations(object):
 
 
     def _update_initial(
-            self, resource_group_name, private_cloud_name, private_cloud, custom_headers=None, raw=False, **operation_config):
+            self, resource_group_name, private_cloud_name, private_cloud_update, custom_headers=None, raw=False, **operation_config):
         # Construct URL
         url = self.update.metadata['url']
         path_format_arguments = {
@@ -361,7 +361,7 @@ class PrivateCloudsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(private_cloud, 'PrivateCloud')
+        body_content = self._serialize.body(private_cloud_update, 'PrivateCloudUpdate')
 
         # Construct and send request
         request = self._client.patch(url, query_parameters, header_parameters, body_content)
@@ -386,7 +386,7 @@ class PrivateCloudsOperations(object):
         return deserialized
 
     def update(
-            self, resource_group_name, private_cloud_name, private_cloud, custom_headers=None, raw=False, polling=True, **operation_config):
+            self, resource_group_name, private_cloud_name, private_cloud_update, custom_headers=None, raw=False, polling=True, **operation_config):
         """Update a private cloud.
 
         :param resource_group_name: The name of the resource group. The name
@@ -394,8 +394,9 @@ class PrivateCloudsOperations(object):
         :type resource_group_name: str
         :param private_cloud_name: Name of the private cloud
         :type private_cloud_name: str
-        :param private_cloud: The private cloud
-        :type private_cloud: ~vendored_sdks.models.PrivateCloud
+        :param private_cloud_update: The private cloud properties to be
+         udpated
+        :type private_cloud_update: ~vendored_sdks.models.PrivateCloudUpdate
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: The poller return type is ClientRawResponse, the
          direct response alongside the deserialized response
@@ -412,7 +413,7 @@ class PrivateCloudsOperations(object):
         raw_result = self._update_initial(
             resource_group_name=resource_group_name,
             private_cloud_name=private_cloud_name,
-            private_cloud=private_cloud,
+            private_cloud_update=private_cloud_update,
             custom_headers=custom_headers,
             raw=True,
             **operation_config

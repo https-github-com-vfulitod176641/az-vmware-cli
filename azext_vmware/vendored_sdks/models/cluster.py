@@ -20,10 +20,10 @@ class Cluster(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar cluster_id: The identity
-    :vartype cluster_id: int
     :param cluster_size: The cluster size
     :type cluster_size: int
+    :ivar cluster_id: The identity
+    :vartype cluster_id: int
     :ivar hosts: The hosts
     :vartype hosts: list[str]
     :ivar provisioning_state: The state of the cluster provisioning. Possible
@@ -45,15 +45,15 @@ class Cluster(Resource):
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
-        'cluster_id': {'key': 'properties.clusterId', 'type': 'int'},
         'cluster_size': {'key': 'properties.clusterSize', 'type': 'int'},
+        'cluster_id': {'key': 'properties.clusterId', 'type': 'int'},
         'hosts': {'key': 'properties.hosts', 'type': '[str]'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
     }
 
     def __init__(self, **kwargs):
         super(Cluster, self).__init__(**kwargs)
-        self.cluster_id = None
         self.cluster_size = kwargs.get('cluster_size', None)
+        self.cluster_id = None
         self.hosts = None
         self.provisioning_state = None

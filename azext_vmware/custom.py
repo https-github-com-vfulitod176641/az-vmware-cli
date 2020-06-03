@@ -16,12 +16,12 @@ def privatecloud_show(cmd, client: AVSClient, resource_group_name, name):
     return client.private_clouds.get(resource_group_name, name)
 
 def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, location, sku, cluster_size, network_block, circuit_primary_subnet=None, circuit_secondary_subnet=None, internet=None, vcenter_password=None, nsxt_password=None, tags=[]):
-    from azext_vmware.vendored_sdks.models import PrivateCloud, Circuit, DefaultClusterProperties, Sku
+    from azext_vmware.vendored_sdks.models import PrivateCloud, Circuit, ManagementCluster, Sku
     if circuit_primary_subnet is not None or circuit_secondary_subnet is not None:
         circuit = Circuit(primary_subnet=circuit_primary_subnet, secondary_subnet=circuit_secondary_subnet)
     else:
         circuit = None
-    management_cluster = DefaultClusterProperties(cluster_size=cluster_size)
+    management_cluster = ManagementCluster(cluster_size=cluster_size)
     cloud = PrivateCloud(location=location, sku=Sku(name=sku), circuit=circuit, management_cluster=management_cluster, network_block=network_block, tags=tags)
     if internet is not None:
         cloud.internet = internet
@@ -32,12 +32,13 @@ def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, locat
     return client.private_clouds.create_or_update(resource_group_name, name, cloud)
 
 def privatecloud_update(cmd, client: AVSClient, resource_group_name, name, cluster_size=None, internet=None):
-    cloud = privatecloud_show(cmd, client, resource_group_name, name)
+    from azext_vmware.vendored_sdks.models import PrivateCloudUpdate, ManagementCluster
+    private_cloud_update = privatecloud_show(cmd, client, resource_group_name, name)
     if cluster_size is not None:
-        cloud.management_cluster.cluster_size = cluster_size
+        private_cloud_update.management_cluster = ManagementCluster(cluster_size=cluster_size)
     if internet is not None:
-        cloud.internet = internet
-    return client.private_clouds.update(resource_group_name, name, cloud)
+        private_cloud_update.internet = internet
+    return client.private_clouds.update(resource_group_name, name, private_cloud_update)
 
 def privatecloud_delete(cmd, client: AVSClient, resource_group_name, name):
     return client.private_clouds.delete(resource_group_name, name)
@@ -71,9 +72,9 @@ def cluster_create(cmd, client: AVSClient, resource_group_name, name, private_cl
     return client.clusters.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster=cluster)
 
 def cluster_update(cmd, client: AVSClient, resource_group_name, name, private_cloud, size, tags=[]):
-    from azext_vmware.vendored_sdks.models import Cluster
-    cluster = Cluster(cluster_size=size)
-    return client.clusters.update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster=cluster)
+    from azext_vmware.vendored_sdks.models import ClusterUpdate
+    cluster_update = ClusterUpdate(cluster_size=size)
+    return client.clusters.update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster_update=cluster_update)
 
 def cluster_list(cmd, client: AVSClient, resource_group_name, private_cloud):
     return client.clusters.list(resource_group_name=resource_group_name, private_cloud_name=private_cloud)

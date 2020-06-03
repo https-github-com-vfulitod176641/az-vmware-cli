@@ -281,7 +281,7 @@ class ClustersOperations(object):
 
 
     def _update_initial(
-            self, resource_group_name, private_cloud_name, cluster_name, cluster, custom_headers=None, raw=False, **operation_config):
+            self, resource_group_name, private_cloud_name, cluster_name, cluster_update, custom_headers=None, raw=False, **operation_config):
         # Construct URL
         url = self.update.metadata['url']
         path_format_arguments = {
@@ -308,7 +308,7 @@ class ClustersOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(cluster, 'Cluster')
+        body_content = self._serialize.body(cluster_update, 'ClusterUpdate')
 
         # Construct and send request
         request = self._client.patch(url, query_parameters, header_parameters, body_content)
@@ -333,7 +333,7 @@ class ClustersOperations(object):
         return deserialized
 
     def update(
-            self, resource_group_name, private_cloud_name, cluster_name, cluster, custom_headers=None, raw=False, polling=True, **operation_config):
+            self, resource_group_name, private_cloud_name, cluster_name, cluster_update, custom_headers=None, raw=False, polling=True, **operation_config):
         """Update a cluster in a private cloud.
 
         :param resource_group_name: The name of the resource group. The name
@@ -343,8 +343,8 @@ class ClustersOperations(object):
         :type private_cloud_name: str
         :param cluster_name: Name of the cluster in the private cloud
         :type cluster_name: str
-        :param cluster: A cluster in a private cloud
-        :type cluster: ~vendored_sdks.models.Cluster
+        :param cluster_update: The cluster properties to be updated
+        :type cluster_update: ~vendored_sdks.models.ClusterUpdate
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: The poller return type is ClientRawResponse, the
          direct response alongside the deserialized response
@@ -362,7 +362,7 @@ class ClustersOperations(object):
             resource_group_name=resource_group_name,
             private_cloud_name=private_cloud_name,
             cluster_name=cluster_name,
-            cluster=cluster,
+            cluster_update=cluster_update,
             custom_headers=custom_headers,
             raw=True,
             **operation_config

@@ -14,6 +14,8 @@ class PrivateCloud(TrackedResource):
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
+    All required parameters must be populated in order to send to Azure.
+
     :ivar id: Resource ID.
     :vartype id: str
     :ivar name: Resource name.
@@ -24,8 +26,15 @@ class PrivateCloud(TrackedResource):
     :type location: str
     :param tags: Resource tags
     :type tags: dict[str, str]
-    :param sku: The private cloud SKU
+    :param sku: Required. The private cloud SKU
     :type sku: ~vendored_sdks.models.Sku
+    :param management_cluster: The default cluster used for management
+    :type management_cluster: ~vendored_sdks.models.ManagementCluster
+    :param internet: Connectivity to internet is enabled or disabled. Possible
+     values include: 'Enabled', 'Disabled'
+    :type internet: str or ~vendored_sdks.models.InternetEnum
+    :param identity_sources: vCenter Single Sign On Identity Sources
+    :type identity_sources: list[~vendored_sdks.models.IdentitySource]
     :ivar provisioning_state: The provisioning state. Possible values include:
      'Succeeded', 'Failed', 'Cancelled', 'Pending', 'Building', 'Deleting',
      'Updating'
@@ -33,19 +42,12 @@ class PrivateCloud(TrackedResource):
      ~vendored_sdks.models.PrivateCloudProvisioningState
     :param circuit: An ExpressRoute Circuit
     :type circuit: ~vendored_sdks.models.Circuit
-    :param management_cluster: The default cluster used for management
-    :type management_cluster: ~vendored_sdks.models.DefaultClusterProperties
     :ivar endpoints: The endpoints
     :vartype endpoints: ~vendored_sdks.models.Endpoints
-    :param internet: Connectivity to internet is enabled or disabled. Possible
-     values include: 'Enabled', 'Disabled'
-    :type internet: str or ~vendored_sdks.models.InternetEnum
-    :param identity_sources: vCenter Single Sign On Identity Sources
-    :type identity_sources: list[~vendored_sdks.models.IdentitySource]
-    :param network_block: The block of addresses should be unique across VNet
-     in your subscription as well as on-premise. Make sure the CIDR format is
-     conformed to (A.B.C.D/X) where A,B,C,D are between 0 and 255, and X is
-     between 0 and 22
+    :param network_block: Required. The block of addresses should be unique
+     across VNet in your subscription as well as on-premise. Make sure the CIDR
+     format is conformed to (A.B.C.D/X) where A,B,C,D are between 0 and 255,
+     and X is between 0 and 22
     :type network_block: str
     :ivar management_network: Network used to access vCenter Server and NSX-T
      Manager
@@ -75,8 +77,10 @@ class PrivateCloud(TrackedResource):
         'id': {'readonly': True},
         'name': {'readonly': True},
         'type': {'readonly': True},
+        'sku': {'required': True},
         'provisioning_state': {'readonly': True},
         'endpoints': {'readonly': True},
+        'network_block': {'required': True},
         'management_network': {'readonly': True},
         'provisioning_network': {'readonly': True},
         'vmotion_network': {'readonly': True},
@@ -92,12 +96,12 @@ class PrivateCloud(TrackedResource):
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'sku': {'key': 'sku', 'type': 'Sku'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'circuit': {'key': 'properties.circuit', 'type': 'Circuit'},
-        'management_cluster': {'key': 'properties.managementCluster', 'type': 'DefaultClusterProperties'},
-        'endpoints': {'key': 'properties.endpoints', 'type': 'Endpoints'},
+        'management_cluster': {'key': 'properties.managementCluster', 'type': 'ManagementCluster'},
         'internet': {'key': 'properties.internet', 'type': 'str'},
         'identity_sources': {'key': 'properties.identitySources', 'type': '[IdentitySource]'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'circuit': {'key': 'properties.circuit', 'type': 'Circuit'},
+        'endpoints': {'key': 'properties.endpoints', 'type': 'Endpoints'},
         'network_block': {'key': 'properties.networkBlock', 'type': 'str'},
         'management_network': {'key': 'properties.managementNetwork', 'type': 'str'},
         'provisioning_network': {'key': 'properties.provisioningNetwork', 'type': 'str'},
@@ -112,12 +116,12 @@ class PrivateCloud(TrackedResource):
     def __init__(self, **kwargs):
         super(PrivateCloud, self).__init__(**kwargs)
         self.sku = kwargs.get('sku', None)
-        self.provisioning_state = None
-        self.circuit = kwargs.get('circuit', None)
         self.management_cluster = kwargs.get('management_cluster', None)
-        self.endpoints = None
         self.internet = kwargs.get('internet', None)
         self.identity_sources = kwargs.get('identity_sources', None)
+        self.provisioning_state = None
+        self.circuit = kwargs.get('circuit', None)
+        self.endpoints = None
         self.network_block = kwargs.get('network_block', None)
         self.management_network = None
         self.provisioning_network = None

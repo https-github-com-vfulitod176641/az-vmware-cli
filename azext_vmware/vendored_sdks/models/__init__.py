@@ -19,9 +19,11 @@ try:
     from .endpoints_py3 import Endpoints
     from .identity_source_py3 import IdentitySource
     from .sku_py3 import Sku
-    from .default_cluster_properties_py3 import DefaultClusterProperties
     from .private_cloud_py3 import PrivateCloud
+    from .management_cluster_py3 import ManagementCluster
+    from .private_cloud_update_py3 import PrivateCloudUpdate
     from .cluster_py3 import Cluster
+    from .cluster_update_py3 import ClusterUpdate
     from .admin_credentials_py3 import AdminCredentials
     from .hcx_enterprise_site_py3 import HcxEnterpriseSite
 except (SyntaxError, ImportError):
@@ -38,9 +40,11 @@ except (SyntaxError, ImportError):
     from .endpoints import Endpoints
     from .identity_source import IdentitySource
     from .sku import Sku
-    from .default_cluster_properties import DefaultClusterProperties
     from .private_cloud import PrivateCloud
+    from .management_cluster import ManagementCluster
+    from .private_cloud_update import PrivateCloudUpdate
     from .cluster import Cluster
+    from .cluster_update import ClusterUpdate
     from .admin_credentials import AdminCredentials
     from .hcx_enterprise_site import HcxEnterpriseSite
 from .operation_paged import OperationPaged
@@ -73,9 +77,11 @@ __all__ = [
     'Endpoints',
     'IdentitySource',
     'Sku',
-    'DefaultClusterProperties',
     'PrivateCloud',
+    'ManagementCluster',
+    'PrivateCloudUpdate',
     'Cluster',
+    'ClusterUpdate',
     'AdminCredentials',
     'HcxEnterpriseSite',
     'OperationPaged',
