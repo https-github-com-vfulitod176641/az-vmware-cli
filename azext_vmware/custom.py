@@ -86,7 +86,7 @@ def cluster_delete(cmd, client: AVSClient, resource_group_name, private_cloud, n
     return client.clusters.delete(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name)
 
 def check_quota_availability(cmd, client: AVSClient, location):
-    return client.check_quota_availability(location)
+    return client.locations.check_quota_availability(location)
 
 
 def authorization_create(cmd, client: AVSClient, resource_group_name, private_cloud, name):
