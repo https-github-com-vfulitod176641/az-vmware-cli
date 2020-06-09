@@ -33,7 +33,7 @@ def privatecloud_create(cmd, client: AVSClient, resource_group_name, name, locat
 
 def privatecloud_update(cmd, client: AVSClient, resource_group_name, name, cluster_size=None, internet=None):
     from azext_vmware.vendored_sdks.models import PrivateCloudUpdate, ManagementCluster
-    private_cloud_update = privatecloud_show(cmd, client, resource_group_name, name)
+    private_cloud_update = PrivateCloudUpdate()
     if cluster_size is not None:
         private_cloud_update.management_cluster = ManagementCluster(cluster_size=cluster_size)
     if internet is not None:
