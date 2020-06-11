@@ -5,10 +5,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .cluster_update import ClusterUpdate
+from .cluster_update_properties import ClusterUpdateProperties
 
 
-class ManagementCluster(ClusterUpdate):
+class ManagementCluster(ClusterUpdateProperties):
     """The properties of a default cluster.
 
     Variables are only populated by the server, and will be ignored when

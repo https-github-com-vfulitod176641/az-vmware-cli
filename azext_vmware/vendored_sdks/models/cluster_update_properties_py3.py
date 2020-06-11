@@ -8,17 +8,17 @@
 from msrest.serialization import Model
 
 
-class ClusterUpdate(Model):
-    """An update of a cluster resource.
+class ClusterUpdateProperties(Model):
+    """The properties of a cluster that may be updated.
 
     :param cluster_size: The cluster size
     :type cluster_size: int
     """
 
     _attribute_map = {
-        'cluster_size': {'key': 'properties.clusterSize', 'type': 'int'},
+        'cluster_size': {'key': 'clusterSize', 'type': 'int'},
     }
 
     def __init__(self, *, cluster_size: int=None, **kwargs) -> None:
-        super(ClusterUpdate, self).__init__(**kwargs)
+        super(ClusterUpdateProperties, self).__init__(**kwargs)
         self.cluster_size = cluster_size

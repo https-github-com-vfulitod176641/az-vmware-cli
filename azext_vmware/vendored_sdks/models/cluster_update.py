@@ -9,14 +9,14 @@ from msrest.serialization import Model
 
 
 class ClusterUpdate(Model):
-    """The properties of a cluster that may be updated.
+    """An update of a cluster resource.
 
     :param cluster_size: The cluster size
     :type cluster_size: int
     """
 
     _attribute_map = {
-        'cluster_size': {'key': 'clusterSize', 'type': 'int'},
+        'cluster_size': {'key': 'properties.clusterSize', 'type': 'int'},
     }
 
     def __init__(self, **kwargs):

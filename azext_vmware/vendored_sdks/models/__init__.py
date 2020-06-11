@@ -23,6 +23,7 @@ try:
     from .management_cluster_py3 import ManagementCluster
     from .private_cloud_update_py3 import PrivateCloudUpdate
     from .cluster_py3 import Cluster
+    from .cluster_update_properties_py3 import ClusterUpdateProperties
     from .cluster_update_py3 import ClusterUpdate
     from .admin_credentials_py3 import AdminCredentials
     from .hcx_enterprise_site_py3 import HcxEnterpriseSite
@@ -44,6 +45,7 @@ except (SyntaxError, ImportError):
     from .management_cluster import ManagementCluster
     from .private_cloud_update import PrivateCloudUpdate
     from .cluster import Cluster
+    from .cluster_update_properties import ClusterUpdateProperties
     from .cluster_update import ClusterUpdate
     from .admin_credentials import AdminCredentials
     from .hcx_enterprise_site import HcxEnterpriseSite
@@ -81,6 +83,7 @@ __all__ = [
     'ManagementCluster',
     'PrivateCloudUpdate',
     'Cluster',
+    'ClusterUpdateProperties',
     'ClusterUpdate',
     'AdminCredentials',
     'HcxEnterpriseSite',

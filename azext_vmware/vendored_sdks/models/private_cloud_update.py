@@ -9,7 +9,7 @@ from msrest.serialization import Model
 
 
 class PrivateCloudUpdate(Model):
-    """The properties of a private cloud resource that may be updated.
+    """An update to a private cloud resource.
 
     :param management_cluster: The default cluster used for management
     :type management_cluster: ~vendored_sdks.models.ManagementCluster
@@ -21,9 +21,9 @@ class PrivateCloudUpdate(Model):
     """
 
     _attribute_map = {
-        'management_cluster': {'key': 'managementCluster', 'type': 'ManagementCluster'},
-        'internet': {'key': 'internet', 'type': 'str'},
-        'identity_sources': {'key': 'identitySources', 'type': '[IdentitySource]'},
+        'management_cluster': {'key': 'properties.managementCluster', 'type': 'ManagementCluster'},
+        'internet': {'key': 'properties.internet', 'type': 'str'},
+        'identity_sources': {'key': 'properties.identitySources', 'type': '[IdentitySource]'},
     }
 
     def __init__(self, **kwargs):
