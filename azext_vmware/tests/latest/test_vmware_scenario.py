@@ -14,7 +14,7 @@ class VmwareScenarioTest(ScenarioTest):
     @ResourceGroupPreparer(name_prefix='cli_test_vmware')
     def test_vmware(self):
         self.kwargs.update({
-            'loc': 'southcentralus',
+            'loc': 'centralus',
             'privatecloud': 'cloud1',
             'cluster': 'cluster1'
         })
@@ -27,7 +27,7 @@ class VmwareScenarioTest(ScenarioTest):
         self.assertEqual(count, 0, 'private cloud count expected to be 0')
 
         # create a private cloud
-        self.cmd('vmware private-cloud create -g {rg} -n {privatecloud} --location {loc} --sku he --cluster-size 4 --network-block 192.168.48.0/22 --nsxt-password 5rqdLj4GF3cePUe6( --vcenter-password UpfBXae9ZquZSDXk( ')
+        self.cmd('vmware private-cloud create -g {rg} -n {privatecloud} --location {loc} --sku av20 --cluster-size 4 --network-block 192.168.48.0/22 --nsxt-password 5rqdLj4GF3cePUe6( --vcenter-password UpfBXae9ZquZSDXk( ')
 
         count = len(self.cmd('vmware private-cloud list -g {rg}').get_output_in_json())
         self.assertEqual(count, 1, 'private cloud count expected to be 1')
@@ -64,7 +64,7 @@ class VmwareScenarioTest(ScenarioTest):
         self.assertEqual(count, 0, 'cluster count expected to be 0')
 
         # cluster create
-        self.cmd('vmware cluster create -g {rg} -c {privatecloud} -n {cluster} --size 3')
+        self.cmd('vmware cluster create -g {rg} -c {privatecloud} -n {cluster} --sku av20 --size 3')
 
         # cluster list should report 1
         count = len(self.cmd('vmware cluster list -g {rg} -c {privatecloud}').get_output_in_json())
@@ -81,7 +81,3 @@ class VmwareScenarioTest(ScenarioTest):
 
         count = len(self.cmd('vmware private-cloud list -g {rg}').get_output_in_json())
         self.assertEqual(count, 0, 'private cloud count expected to be 0')
-
-        # show should throw ResourceNotFound
-        with self.assertRaisesRegexp(CloudError, 'ResourceNotFound'):
-            self.cmd('vmware private-cloud show -g {rg} -n {privatecloud}')

@@ -53,7 +53,7 @@ def privatecloud_addidentitysource(cmd, client: AVSClient, resource_group_name, 
     if secondary_server is not None:
         identitysource.secondary_server = secondary_server
     pc.identity_sources.append(identitysource)
-    return client.private_clouds.update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, private_cloud=pc)
+    return client.private_clouds.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, private_cloud=pc)
 
 def privatecloud_deleteidentitysource(cmd, client: AVSClient, resource_group_name, name, private_cloud, alias, domain):
     from azext_vmware.vendored_sdks.models import IdentitySource
@@ -62,13 +62,13 @@ def privatecloud_deleteidentitysource(cmd, client: AVSClient, resource_group_nam
         if ids.name == name and ids.alias == alias and ids.domain == domain), None)
     if found:
         pc.identity_sources.remove(found)
-        return client.private_clouds.update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, private_cloud=pc)
+        return client.private_clouds.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, private_cloud=pc)
     else:
         return pc
 
-def cluster_create(cmd, client: AVSClient, resource_group_name, name, private_cloud, size, tags=[]):
-    from azext_vmware.vendored_sdks.models import Cluster
-    cluster = Cluster(cluster_size=size)
+def cluster_create(cmd, client: AVSClient, resource_group_name, name, sku, private_cloud, size, tags=[]):
+    from azext_vmware.vendored_sdks.models import Cluster, Sku
+    cluster = Cluster(sku=Sku(name=sku), cluster_size=size)
     return client.clusters.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, cluster_name=name, cluster=cluster)
 
 def cluster_update(cmd, client: AVSClient, resource_group_name, name, private_cloud, size, tags=[]):
