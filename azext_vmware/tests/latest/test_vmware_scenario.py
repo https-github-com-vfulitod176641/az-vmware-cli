@@ -12,7 +12,7 @@ from msrestazure.azure_exceptions import CloudError
 class VmwareScenarioTest(ScenarioTest):
     def setUp(self):
         # https://vcrpy.readthedocs.io/en/latest/configuration.html#request-matching
-        self.vcr.match_on=['scheme', 'method', 'path'] # not 'host', 'port'
+        self.vcr.match_on=['scheme', 'method', 'path', 'query'] # not 'host', 'port'
         super(VmwareScenarioTest, self).setUp()
 
     @ResourceGroupPreparer(name_prefix='cli_test_vmware')
