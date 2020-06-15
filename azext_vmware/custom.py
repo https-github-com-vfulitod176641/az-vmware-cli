@@ -104,7 +104,7 @@ def authorization_delete(cmd, client: AVSClient, resource_group_name, private_cl
     return client.authorizations.delete(resource_group_name=resource_group_name, private_cloud_name=private_cloud, authorization_name=name)	
 
 
-def hcxenterprisesite_create(cmd, client: AVSClient, resource_group_name, name, private_cloud, size, tags=[]):	
+def hcxenterprisesite_create(cmd, client: AVSClient, resource_group_name, private_cloud, name):	
     from azext_vmware.vendored_sdks.models import HcxEnterpriseSite	
     hcx_enterprise_site = HcxEnterpriseSite()
     return client.hcx_enterprise_sites.create_or_update(resource_group_name=resource_group_name, private_cloud_name=private_cloud, hcx_enterprise_site_name=name, hcx_enterprise_site=hcx_enterprise_site)	
