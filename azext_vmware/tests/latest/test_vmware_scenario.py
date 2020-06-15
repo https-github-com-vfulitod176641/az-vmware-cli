@@ -39,7 +39,7 @@ class VmwareScenarioTest(ScenarioTest):
 
         # get admin credentials
         # TODO not currently supported in test environment
-        # self.cmd('vmware private-cloud listadmincredentials -g {rg} -n {privatecloud}')
+        self.cmd('vmware private-cloud listadmincredentials -g {rg} -c {privatecloud}')
 
         # update private cloud to changed default cluster size
         self.cmd('vmware private-cloud update -g {rg} -n {privatecloud} --cluster-size 3')
