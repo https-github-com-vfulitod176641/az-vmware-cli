@@ -69,8 +69,6 @@ class PrivateCloud(TrackedResource):
     :ivar nsxt_certificate_thumbprint: Thumbprint of the NSX-T Manager SSL
      certificate
     :vartype nsxt_certificate_thumbprint: str
-    :ivar hcx_cloud_manager_ip: The IP address of the HCX Cloud Manager
-    :vartype hcx_cloud_manager_ip: str
     """
 
     _validation = {
@@ -86,7 +84,6 @@ class PrivateCloud(TrackedResource):
         'vmotion_network': {'readonly': True},
         'vcenter_certificate_thumbprint': {'readonly': True},
         'nsxt_certificate_thumbprint': {'readonly': True},
-        'hcx_cloud_manager_ip': {'readonly': True},
     }
 
     _attribute_map = {
@@ -110,7 +107,6 @@ class PrivateCloud(TrackedResource):
         'nsxt_password': {'key': 'properties.nsxtPassword', 'type': 'str'},
         'vcenter_certificate_thumbprint': {'key': 'properties.vcenterCertificateThumbprint', 'type': 'str'},
         'nsxt_certificate_thumbprint': {'key': 'properties.nsxtCertificateThumbprint', 'type': 'str'},
-        'hcx_cloud_manager_ip': {'key': 'properties.hcxCloudManagerIP', 'type': 'str'},
     }
 
     def __init__(self, **kwargs):
@@ -130,4 +126,3 @@ class PrivateCloud(TrackedResource):
         self.nsxt_password = kwargs.get('nsxt_password', None)
         self.vcenter_certificate_thumbprint = None
         self.nsxt_certificate_thumbprint = None
-        self.hcx_cloud_manager_ip = None
