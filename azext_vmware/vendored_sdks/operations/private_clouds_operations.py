@@ -395,7 +395,7 @@ class PrivateCloudsOperations(object):
         :param private_cloud_name: Name of the private cloud
         :type private_cloud_name: str
         :param private_cloud_update: The private cloud properties to be
-         udpated
+         updated
         :type private_cloud_update: ~vendored_sdks.models.PrivateCloudUpdate
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: The poller return type is ClientRawResponse, the
